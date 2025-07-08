@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/style.css">
+    <title>Phaser - Game</title>
+
+    <!-- <style>
+        /* reset CSS */
+        html,
+        body {
+            margin: 0
+            padding: 0;
+        }
+    </style> -->
+</head>
+
+<body>
+    <div class="dev-info">
+        <span class="reload-status disconnected" id="reload-status"></span>
+        <span id="reload-text">Live Reload</span>
+    </div>
+    <div id="app">
+        <div id="game-container"></div>
+    </div>
+    <!-- Live reload script -->
+    <script>
+        // Live reload WebSocket connection
+        let reloadWs = null;
+        const reloadStatus = document.getElementById('reload-status');
+        const reloadText = document.getElementById('reload-text');
+
+        function connectReloadWs() {
+            const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
+            reloadWs = new WebSocket(`${protocol}//${window.location.host}/ws/reload`);
+
+            reloadWs.onopen = () => {
+                console.log('🔄 Live reload connected');
+                reloadStatus.className = 'reload-status connected';
+                reloadText.textContent = 'Live Reload ✓';
+            };
+
+            reloadWs.onmessage = (event) => {
+                if (event.data === 'reload') {
+                    console.log('🔄 Reloading page...');
+                    window.location.reload();
+                }
+            };
+
+            reloadWs.onclose = () => {
+                console.log('🔄 Live reload disconnected');
+                reloadStatus.className = 'reload-status disconnected';
+                reloadText.textContent = 'Live Reload ✗';
+
+                // Attempt to reconnect after 2 seconds
+                setTimeout(connectReloadWs, 2000);
+            };
+
+            reloadWs.onerror = (error) => {
+                console.log('🔄 Live reload error:', error);
+            };
+        }
+
+        // Connect to live reload WebSocket
+        connectReloadWs();
+    </script>
+    <!-- Load the game -->
+    <script type="module" src="js/basicgame/main.js"></script>
+</body>
+
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        background: #2c3e50;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        font-family: Arial, sans-serif;
+    }
+
+    #game-container {
+        border: 2px solid #34495e;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .dev-info {
+        position: fixed;
+        top: 10px;
+        right: 10px;
+        background: rgba(0, 0, 0, 0.7);
+        color: white;
+        padding: 8px 12px;
+        border-radius: 4px;
+        font-size: 12px;
+        z-index: 1000;
+    }
+
+    .reload-status {
+        display: inline-block;
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        margin-right: 8px;
+    }
+
+    .reload-status.connected {
+        background: #2ecc71;
+    }
+
+    .reload-status.disconnected {
+        background: #e74c3c;
+    }
+</style>
+
+</html>

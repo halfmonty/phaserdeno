@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D Phaser Game with enable3d</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: #000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            font-family: Arial, sans-serif;
+        }
+        canvas {
+            border: 2px solid #333;
+        }
+        .info {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            color: white;
+            font-size: 14px;
+            z-index: 100;
+        }
+    </style>
+</head>
+<body>
+    <div class="info">
+        <div>WASD: Move camera</div>
+        <div>Mouse: Look around</div>
+        <div>Click cube to change color</div>
+    </div>
+
+    <script type="importmap">
+    {
+        "imports": {
+            "three": "https://esm.sh/three@0.152.2",
+            "matter-js": "https://esm.sh/matter-js@0.17.1"
+        }
+    }
+    </script>
+
+    <script type="module">
+        // Import Phaser and enable3d
+        import Phaser from 'https://esm.sh/phaser@3.70.0';
+        import { enable3d, Scene3D, ExtendedObject3D } from 'https://esm.sh/@enable3d/phaser-extension@0.25.4?standalone';
+
+        
+        // Import enable3d components individually to avoid dependency issues
+        // let enable3d, Scene3D, ExtendedObject3D;
+        
+        // try {
+        //     const enable3dModule = await import('@enable3d/phaser-extension');
+        //     enable3d = enable3dModule.enable3d;
+        //     Scene3D = enable3dModule.Scene3D;
+        //     ExtendedObject3D = enable3dModule.ExtendedObject3D;
+        // } catch (error) {
+        //     console.warn('Enable3d import failed, falling back to basic 3D setup:', error);
+        //     // Fallback to a basic Phaser scene if enable3d fails
+        //     Scene3D = Phaser.Scene;
+        // }
+
+        class MainScene extends (Scene3D || Phaser.Scene) {
+            constructor() {
+                super({ key: 'MainScene' });
+            }
+
+            init() {
+                // Initialize 3D renderer if available
+                if (this.accessThirdDimension) {
+                    try {
+                        this.accessThirdDimension();
+                        console.log('3D renderer initialized successfully');
+                    } catch (error) {
+                        console.warn('3D initialization failed:', error);
+                        this.fallbackTo2D();
+                    }
+                } else {
+                    this.fallbackTo2D();
+                }
+            }
+
+            fallbackTo2D() {
+                console.log('Falling back to 2D simulation');
+                this.is2DFallback = true;
+            }
+
+            preload() {
+                // Create a simple texture
+                this.load.image('sky', 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkYPhfDwAChwGA60e6kgAAAABJRU5ErkJggg==');
+            }
+
+            create() {
+                this.third.warpSpeed()
+                this.third.physics.add.box()
+            }
+
+            setupControls3D() {
+                // Set up input
+                this.cursors = this.input.keyboard.createCursorKeys();
+                this.wasd = this.input.keyboard.addKeys('W,S,A,D');
+
+                // Mouse controls for camera
+                this.input.on('pointermove', (pointer) => {
+                    if (pointer.isDown) {
+                        this.third.camera.rotation.y -= pointer.movementX * 0.002;
+                        this.third.camera.rotation.x -= pointer.movementY * 0.002;
+                        
+                        // Limit vertical rotation
+                        this.third.camera.rotation.x = Math.max(-Math.PI/2, Math.min(Math.PI/2, this.third.camera.rotation.x));
+                    }
+                });
+
+                // Click to change cube color
+                this.input.on('pointerdown', (pointer) => {
+                    this.changeColor();
+                });
+            }
+
+            setupControls2D() {
+                // Set up input for 2D fallback
+                this.cursors = this.input.keyboard.createCursorKeys();
+                this.wasd = this.input.keyboard.addKeys('W,S,A,D');
+
+                // Click to change cube color
+                this.cube.on('pointerdown', () => {
+                    this.changeColor();
+                });
+            }
+
+            changeColor() {
+                this.colorIndex = (this.colorIndex + 1) % this.colors.length;
+                if (this.is2DFallback) {
+                    this.cube.setFillStyle(this.colors[this.colorIndex]);
+                } else if (this.cube && this.cube.material) {
+                    this.cube.material.color.setHex(this.colors[this.colorIndex]);
+                }
+            }
+        }
+
+        // Game configuration
+        const config = {
+            type: Phaser.WEBGL,
+            width: 800,
+            height: 600,
+            backgroundColor: 0x87CEEB,
+            scene: MainScene,
+            physics: {
+                default: 'arcade'
+            }
+        };
+
+        // Add enable3d configuration if available
+        if (enable3d) {
+            Object.assign(config, enable3d({
+                gravity: { x: 0, y: -9.82, z: 0 },
+                debug: false
+            }));
+        }
+
+        // Start the game
+        const game = new Phaser.Game(config);
+    </script>
+</body>
+</html>

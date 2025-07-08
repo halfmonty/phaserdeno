@@ -1,0 +1,437 @@
+{
+  "version": "5",
+  "specifiers": {
+    "jsr:@hono/hono@^4.8.3": "4.8.3",
+    "jsr:@std/assert@1": "1.0.13",
+    "jsr:@std/internal@^1.0.6": "1.0.9",
+    "npm:@enable3d/phaser-extension@~0.26.1": "0.26.1_@types+three@0.171.0_phaser@3.90.0_three@0.171.0",
+    "npm:@types/node@*": "22.15.15",
+    "npm:phaser3-rex-plugins@*": "1.80.16"
+  },
+  "jsr": {
+    "@hono/hono@4.8.3": {
+      "integrity": "f17509836610b97e9ec86bce5349387115c35ee72b7b29fd2b7944abe5f843ab"
+    },
+    "@std/assert@1.0.13": {
+      "integrity": "ae0d31e41919b12c656c742b22522c32fb26ed0cba32975cb0de2a273cb68b29",
+      "dependencies": [
+        "jsr:@std/internal"
+      ]
+    },
+    "@std/internal@1.0.9": {
+      "integrity": "bdfb97f83e4db7a13e8faab26fb1958d1b80cc64366501af78a0aee151696eb8"
+    }
+  },
+  "npm": {
+    "@babel/runtime@7.27.6": {
+      "integrity": "sha512-vbavdySgbTTrmFE+EsiqUTzlOr5bzlnJtUv9PynGCAKvfQqjIXbvFdumPM/GxMDfyuGMJaJAU6TO4zc1Jf1i8Q=="
+    },
+    "@enable3d/ammo-physics@0.26.1_@types+three@0.171.0_three@0.171.0": {
+      "integrity": "sha512-3LRndxRBJ2VPbKfg2tCGXNm0oMbLBKzglotvGwlosfFVW9xHyxOcu/507jD/8lOtwUKYWHTP5h0Peeoo6uzpZA==",
+      "dependencies": [
+        "@enable3d/common",
+        "@enable3d/three-wrapper",
+        "@types/three",
+        "@yandeu/events@0.0.7",
+        "three"
+      ]
+    },
+    "@enable3d/common@0.26.1_@types+three@0.171.0_three@0.171.0": {
+      "integrity": "sha512-S1mvq3R71LYgdTE5PG6/sKvCjhv8yODQTtJYick5sdVvBEA8IlwTevl5gmBNzI04sCoBvaUepE34WWsL95bRQA==",
+      "dependencies": [
+        "@enable3d/three-wrapper",
+        "@yandeu/events@0.0.7"
+      ]
+    },
+    "@enable3d/phaser-extension@0.26.1_@types+three@0.171.0_phaser@3.90.0_three@0.171.0": {
+      "integrity": "sha512-joZr7iIaqFECjw1HL9ADJ65QvwVWf3+gOoyTs+knun4BQ4rRI4r1iCzNh1U5HhBkKGAzMZJgJ7/uWPG93Z5dNg==",
+      "dependencies": [
+        "@enable3d/ammo-physics",
+        "@enable3d/common",
+        "@enable3d/three-graphics",
+        "@enable3d/three-wrapper",
+        "@types/three",
+        "@yandeu/events@0.0.7",
+        "phaser",
+        "three"
+      ]
+    },
+    "@enable3d/three-graphics@0.26.1_@types+matter-js@0.17.6_@types+three@0.171.0_matter-js@0.17.1_poly-decomp@0.3.0_three@0.171.0": {
+      "integrity": "sha512-s7RuKUVZeelI6PW5G8eLjFFm7Wsp03t15ISDdTQFRKf4jk9jZW9U6cX9/fuVKDjfIGfTMB2b2izOUpo1ft6EUA==",
+      "dependencies": [
+        "@enable3d/ammo-physics",
+        "@enable3d/common",
+        "@enable3d/three-wrapper",
+        "@types/matter-js",
+        "@types/three",
+        "@yandeu/events@0.0.7",
+        "@yandeu/tap",
+        "matter-js",
+        "poly-decomp",
+        "three",
+        "three-csg-ts"
+      ]
+    },
+    "@enable3d/three-wrapper@0.26.1_@types+three@0.171.0_three@0.171.0": {
+      "integrity": "sha512-evzptJ99LIymOIQFk//l6lgMa8VJ0tgUn+q7OS5ycR1vbqmcuAs7M80m5UIdVcEg+5Ef1Gsy4sPEV3JWbhJP7A==",
+      "dependencies": [
+        "@types/three",
+        "three"
+      ]
+    },
+    "@tweenjs/tween.js@23.1.3": {
+      "integrity": "sha512-vJmvvwFxYuGnF2axRtPYocag6Clbb5YS7kLL+SO/TeVFzHqDIWrNKYtcsPMibjDx9O+bu+psAy9NKfWklassUA=="
+    },
+    "@types/matter-js@0.17.6": {
+      "integrity": "sha512-i6WLNuM7/89SLqO2aOyaUkom9tc3B/qo4ekh7BD99xQ8+wOVVZO0F4RzKNYZCaFwr+xp3pK3oIb6sSVjLpz+pA=="
+    },
+    "@types/node@22.15.15": {
+      "integrity": "sha512-R5muMcZob3/Jjchn5LcO8jdKwSCbzqmPB6ruBxMcf9kbxtniZHP327s6C37iOfuw8mbKK3cAQa7sEl7afLrQ8A==",
+      "dependencies": [
+        "undici-types"
+      ]
+    },
+    "@types/stats.js@0.17.4": {
+      "integrity": "sha512-jIBvWWShCvlBqBNIZt0KAshWpvSjhkwkEu4ZUcASoAvhmrgAUI2t1dXrjSL4xXVLB4FznPrIsX3nKXFl/Dt4vA=="
+    },
+    "@types/three@0.171.0": {
+      "integrity": "sha512-oLuT1SAsT+CUg/wxUTFHo0K3NtJLnx9sJhZWQJp/0uXqFpzSk1hRHmvWvpaAWSfvx2db0lVKZ5/wV0I0isD2mQ==",
+      "dependencies": [
+        "@tweenjs/tween.js",
+        "@types/stats.js",
+        "@types/webxr",
+        "@webgpu/types",
+        "fflate",
+        "meshoptimizer"
+      ]
+    },
+    "@types/webxr@0.5.22": {
+      "integrity": "sha512-Vr6Stjv5jPRqH690f5I5GLjVk8GSsoQSYJ2FVd/3jJF7KaqfwPi3ehfBS96mlQ2kPCwZaX6U0rG2+NGHBKkA/A=="
+    },
+    "@webgpu/types@0.1.63": {
+      "integrity": "sha512-s9Kuh0nE/2+nKrvmKNMB2fE5Zlr3DL2t3OFKM55v5jRcfCOxbkOHhQoshoFum5mmXIfEtRXtLCWmkeTJsVjE9w=="
+    },
+    "@yandeu/events@0.0.5": {
+      "integrity": "sha512-TUkghSGu0ThcEyAP50WHU/vdQkpt9EZyotjZzG8KirR+VI5o7Rp5wabcGru62JNy+awMR8Voy+kFzhNkC/1E6A=="
+    },
+    "@yandeu/events@0.0.7": {
+      "integrity": "sha512-l78u4CooPw/WlN3H15bhOpims+gAsAkxbcjDn1GZ5oa+h9wqg+pBBzZos38xDeqKW/UVgPMkurVDPrf7JhhmTA=="
+    },
+    "@yandeu/tap@0.0.3": {
+      "integrity": "sha512-GIStEHmboHVbs6ghcRxkO5NVdZtRCsf1mkKI0gvzc21uj5qGlGSCD/Eaax98/c6Mu9+n2lkTYbTwuBbg2vzuQw==",
+      "dependencies": [
+        "@yandeu/events@0.0.5"
+      ]
+    },
+    "argparse@2.0.1": {
+      "integrity": "sha512-8+9WqebbFzpX9OR+Wa6O29asIogeRMzcGtAINdpMHHyAg10f05aSFVBbcEqGf/PXw1EjAZ+q2/bEBg3DvurK3Q=="
+    },
+    "cross-fetch@4.0.0": {
+      "integrity": "sha512-e4a5N8lVvuLgAWgnCrLr2PP0YyDOTHa9H/Rj54dirp61qXnNq46m82bRhNqIA5VccJtWBvPTFRV3TtvHUKPB1g==",
+      "dependencies": [
+        "node-fetch"
+      ]
+    },
+    "dagre@0.8.5": {
+      "integrity": "sha512-/aTqmnRta7x7MCCpExk7HQL2O4owCT2h8NT//9I1OQ9vt29Pa0BzSAkR5lwFUcQ7491yVi/3CXU9jQ5o0Mn2Sw==",
+      "dependencies": [
+        "graphlib",
+        "lodash"
+      ]
+    },
+    "eventemitter3@3.1.2": {
+      "integrity": "sha512-tvtQIeLVHjDkJYnzf2dgVMxfuSGJeM/7UCG17TT4EumTfNtF+0nebF/4zWOIkCreAbtNqhGEboB6BWrwqNaw4Q=="
+    },
+    "eventemitter3@5.0.1": {
+      "integrity": "sha512-GWkBvjiSZK87ELrYOSESUYeVIc9mvLLf/nXalMOS5dYrgZq9o5OVkbZAVM06CVxYsCwH9BDZFPlQTlPA1j4ahA=="
+    },
+    "events@3.3.0": {
+      "integrity": "sha512-mQw+2fkQbALzQ7V0MY0IqdnXNOeTtP4r0lN9z7AAawCXgqea7bDii20AYrIBrFd/Hx0M2Ocz6S111CaFkUcb0Q=="
+    },
+    "fflate@0.8.2": {
+      "integrity": "sha512-cPJU47OaAoCbg0pBvzsgpTPhmhqI5eJjh/JIu8tPj5q+T7iLvW/JAYUqmE7KOB4R1ZyEhzBaIQpQpardBF5z8A=="
+    },
+    "graphlib@2.1.8": {
+      "integrity": "sha512-jcLLfkpoVGmH7/InMC/1hIvOPSUh38oJtGhvrOFGzioE1DZ+0YW16RgmOJhHiuWTvGiJQ9Z1Ik43JvkRPRvE+A==",
+      "dependencies": [
+        "lodash"
+      ]
+    },
+    "graphology-types@0.24.8": {
+      "integrity": "sha512-hDRKYXa8TsoZHjgEaysSRyPdT6uB78Ci8WnjgbStlQysz7xR52PInxNsmnB7IBOM1BhikxkNyCVEFgmPKnpx3Q=="
+    },
+    "graphology@0.25.4_graphology-types@0.24.8": {
+      "integrity": "sha512-33g0Ol9nkWdD6ulw687viS8YJQBxqG5LWII6FI6nul0pq6iM2t5EKquOTFDbyTblRB3O9I+7KX4xI8u5ffekAQ==",
+      "dependencies": [
+        "events",
+        "graphology-types",
+        "obliterator"
+      ]
+    },
+    "i18next-http-backend@2.7.3": {
+      "integrity": "sha512-FgZxrXdRA5u44xfYsJlEBL4/KH3f2IluBpgV/7riW0YW2VEyM8FzVt2XHAOi6id0Ppj7vZvCZVpp5LrGXnc8Ig==",
+      "dependencies": [
+        "cross-fetch"
+      ]
+    },
+    "i18next@22.5.1": {
+      "integrity": "sha512-8TGPgM3pAD+VRsMtUMNknRz3kzqwp/gPALrWMsDnmC1mKqJwpWyooQRLMcbTwq8z8YwSmuj+ZYvc+xCuEpkssA==",
+      "dependencies": [
+        "@babel/runtime"
+      ]
+    },
+    "js-yaml@4.1.0": {
+      "integrity": "sha512-wpxZs9NoxZaJESJGIZTyDEaYpl0FKSA+FB9aJiyemKhMwkxQg63h4T1KJgUGHpTqPDNRcmmYLugrRjJlBtWvRA==",
+      "dependencies": [
+        "argparse"
+      ],
+      "bin": true
+    },
+    "lodash@4.17.21": {
+      "integrity": "sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg=="
+    },
+    "matter-js@0.17.1": {
+      "integrity": "sha512-pSquoENJgvSAlQGcA0s5UkmEohGXZaUww2g3B6qG87x0iEcVf+aigMXn5UkFPdnh6w3B+C4vXSLaYqhHwKrOLA=="
+    },
+    "meshoptimizer@0.18.1": {
+      "integrity": "sha512-ZhoIoL7TNV4s5B6+rx5mC//fw8/POGyNxS/DZyCJeiZ12ScLfVwRE/GfsxwiTkMYYD5DmK2/JXnEVXqL4rF+Sw=="
+    },
+    "mustache@4.2.0": {
+      "integrity": "sha512-71ippSywq5Yb7/tVYyGbkBggbU8H3u5Rz56fH60jGFgr8uHwxs+aSKeqmluIVzM0m0kB7xQjKS6qPfd0b2ZoqQ==",
+      "bin": true
+    },
+    "node-fetch@2.7.0": {
+      "integrity": "sha512-c4FRfUm/dbcWZ7U+1Wq0AwCyFL+3nt2bEw05wfxSz+DWpWsitgmSgYmy2dQdWyKC1694ELPqMs/YzUSNozLt8A==",
+      "dependencies": [
+        "whatwg-url"
+      ]
+    },
+    "obliterator@2.0.5": {
+      "integrity": "sha512-42CPE9AhahZRsMNslczq0ctAEtqk8Eka26QofnqC346BZdHDySk3LWka23LI7ULIw11NmltpiLagIq8gBozxTw=="
+    },
+    "papaparse@5.5.3": {
+      "integrity": "sha512-5QvjGxYVjxO59MGU2lHVYpRWBBtKHnlIAcSe1uNFCkkptUh63NFRj0FJQm7nR67puEruUci/ZkjmEFrjCAyP4A=="
+    },
+    "phaser3-rex-plugins@1.80.16": {
+      "integrity": "sha512-c34SfEjdK7rz8EbM7bDmJwB/xCb/YR77IaAaowzqkCLb7pLeI3E8PfLivm882iirN11XOHjYT2uYlvtdbNAtMA==",
+      "dependencies": [
+        "dagre",
+        "eventemitter3@3.1.2",
+        "graphology",
+        "i18next",
+        "i18next-http-backend",
+        "js-yaml",
+        "mustache",
+        "papaparse",
+        "webfontloader"
+      ]
+    },
+    "phaser@3.90.0": {
+      "integrity": "sha512-/cziz/5ZIn02uDkC9RzN8VF9x3Gs3XdFFf9nkiMEQT3p7hQlWuyjy4QWosU802qqno2YSLn2BfqwOKLv/sSVfQ==",
+      "dependencies": [
+        "eventemitter3@5.0.1"
+      ]
+    },
+    "poly-decomp@0.3.0": {
+      "integrity": "sha512-hWeBxGzPYiybmI4548Fca7Up/0k1qS5+79cVHI9+H33dKya5YNb9hxl0ZnDaDgvrZSuYFBhkCK/HOnqN7gefkQ=="
+    },
+    "three-csg-ts@3.2.0_@types+three@0.171.0_three@0.171.0": {
+      "integrity": "sha512-oTYg8kdal6qgHDbso/6VzA12Udf2ic2uXhf0XlJzuSP+Gs0OUR5gTHSZ7GotAE+M/QcVlw41eOwiWZVnJG5/8w==",
+      "dependencies": [
+        "@types/three",
+        "three"
+      ]
+    },
+    "three@0.171.0": {
+      "integrity": "sha512-Y/lAXPaKZPcEdkKjh0JOAHVv8OOnv/NDJqm0wjfCzyQmfKxV7zvkwsnBgPBKTzJHToSOhRGQAGbPJObT59B/PQ=="
+    },
+    "tr46@0.0.3": {
+      "integrity": "sha512-N3WMsuqV66lT30CrXNbEjx4GEwlow3v6rr4mCcv6prnfwhS01rkgyFdjPNBYd9br7LpXV1+Emh01fHnq2Gdgrw=="
+    },
+    "undici-types@6.21.0": {
+      "integrity": "sha512-iwDZqg0QAGrg9Rav5H4n0M64c3mkR59cJ6wQp+7C4nI0gsmExaedaYLNO44eT4AtBBwjbTiGPMlt2Md0T9H9JQ=="
+    },
+    "webfontloader@1.6.28": {
+      "integrity": "sha512-Egb0oFEga6f+nSgasH3E0M405Pzn6y3/9tOVanv/DLfa1YBIgcv90L18YyWnvXkRbIM17v5Kv6IT2N6g1x5tvQ=="
+    },
+    "webidl-conversions@3.0.1": {
+      "integrity": "sha512-2JAn3z8AR6rjK8Sm8orRC0h/bcl/DqL7tRPdGZ4I1CjdF+EaMLmYxBHyXuKL849eucPFhvBoxMsflfOb8kxaeQ=="
+    },
+    "whatwg-url@5.0.0": {
+      "integrity": "sha512-saE57nupxk6v3HY35+jzBwYa0rKSy0XR8JSxZPwgLr7ys0IBzhGviA1/TUGJLmSVqs8pb9AnvICXEuOHLprYTw==",
+      "dependencies": [
+        "tr46",
+        "webidl-conversions"
+      ]
+    }
+  },
+  "redirects": {
+    "https://esm.sh/@enable3d/ammo-physics@^0.26.1/dist/index?target=denonext": "https://esm.sh/@enable3d/ammo-physics@0.26.1/dist/index?target=denonext",
+    "https://esm.sh/@enable3d/ammo-physics@^0.26.1?target=denonext": "https://esm.sh/@enable3d/ammo-physics@0.26.1?target=denonext",
+    "https://esm.sh/@enable3d/common@^0.26.1/dist/applyMixins?target=denonext": "https://esm.sh/@enable3d/common@0.26.1/dist/applyMixins?target=denonext",
+    "https://esm.sh/@enable3d/common@^0.26.1/dist/customCanvas?target=denonext": "https://esm.sh/@enable3d/common@0.26.1/dist/customCanvas?target=denonext",
+    "https://esm.sh/@enable3d/common@^0.26.1/dist/defaultMaterial?target=denonext": "https://esm.sh/@enable3d/common@0.26.1/dist/defaultMaterial?target=denonext",
+    "https://esm.sh/@enable3d/common@^0.26.1/dist/extendedGroup?target=denonext": "https://esm.sh/@enable3d/common@0.26.1/dist/extendedGroup?target=denonext",
+    "https://esm.sh/@enable3d/common@^0.26.1/dist/extendedMesh?target=denonext": "https://esm.sh/@enable3d/common@0.26.1/dist/extendedMesh?target=denonext",
+    "https://esm.sh/@enable3d/common@^0.26.1/dist/extendedObject3D?target=denonext": "https://esm.sh/@enable3d/common@0.26.1/dist/extendedObject3D?target=denonext",
+    "https://esm.sh/@enable3d/common@^0.26.1/dist/factories?target=denonext": "https://esm.sh/@enable3d/common@0.26.1/dist/factories?target=denonext",
+    "https://esm.sh/@enable3d/common@^0.26.1/dist/logger?target=denonext": "https://esm.sh/@enable3d/common@0.26.1/dist/logger?target=denonext",
+    "https://esm.sh/@enable3d/common@^0.26.1/dist/misc/firstPersonControls?target=denonext": "https://esm.sh/@enable3d/common@0.26.1/dist/misc/firstPersonControls?target=denonext",
+    "https://esm.sh/@enable3d/common@^0.26.1/dist/misc/joystick?target=denonext": "https://esm.sh/@enable3d/common@0.26.1/dist/misc/joystick?target=denonext",
+    "https://esm.sh/@enable3d/common@^0.26.1/dist/misc/pointerDrag?target=denonext": "https://esm.sh/@enable3d/common@0.26.1/dist/misc/pointerDrag?target=denonext",
+    "https://esm.sh/@enable3d/common@^0.26.1/dist/misc/pointerLock?target=denonext": "https://esm.sh/@enable3d/common@0.26.1/dist/misc/pointerLock?target=denonext",
+    "https://esm.sh/@enable3d/common@^0.26.1/dist/misc/thirdPersonControls?target=denonext": "https://esm.sh/@enable3d/common@0.26.1/dist/misc/thirdPersonControls?target=denonext",
+    "https://esm.sh/@enable3d/common@^0.26.1/dist/physicsBody?target=denonext": "https://esm.sh/@enable3d/common@0.26.1/dist/physicsBody?target=denonext",
+    "https://esm.sh/@enable3d/common@^0.26.1/dist/physicsLoader?target=denonext": "https://esm.sh/@enable3d/common@0.26.1/dist/physicsLoader?target=denonext",
+    "https://esm.sh/@enable3d/common@^0.26.1/dist/types?target=denonext": "https://esm.sh/@enable3d/common@0.26.1/dist/types?target=denonext",
+    "https://esm.sh/@enable3d/common@^0.26.1/dist/wasmLoader?target=denonext": "https://esm.sh/@enable3d/common@0.26.1/dist/wasmLoader?target=denonext",
+    "https://esm.sh/@enable3d/phaser-extension": "https://esm.sh/@enable3d/phaser-extension@0.26.1",
+    "https://esm.sh/@enable3d/phaser-extension?standalone": "https://esm.sh/@enable3d/phaser-extension@0.26.1?standalone",
+    "https://esm.sh/@enable3d/three-graphics@^0.26.1/dist/csg/index?target=denonext": "https://esm.sh/@enable3d/three-graphics@0.26.1/dist/csg/index?target=denonext",
+    "https://esm.sh/@enable3d/three-graphics@^0.26.1/dist/flat/index?target=denonext": "https://esm.sh/@enable3d/three-graphics@0.26.1/dist/flat/index?target=denonext",
+    "https://esm.sh/@enable3d/three-graphics@^0.26.1/dist/plugins/index?target=denonext": "https://esm.sh/@enable3d/three-graphics@0.26.1/dist/plugins/index?target=denonext",
+    "https://esm.sh/@enable3d/three-graphics@^0.26.1?target=denonext": "https://esm.sh/@enable3d/three-graphics@0.26.1?target=denonext",
+    "https://esm.sh/@types/matter-js@~0.19.8/index.d.ts": "https://esm.sh/@types/matter-js@0.19.8/index.d.ts",
+    "https://esm.sh/@types/three@~0.172.0/index.d.ts": "https://esm.sh/@types/three@0.172.0/index.d.ts",
+    "https://esm.sh/@types/three@~0.177.0/index.d.ts": "https://esm.sh/@types/three@0.177.0/index.d.ts",
+    "https://esm.sh/@types/three@~0.178.0/index.d.ts": "https://esm.sh/@types/three@0.178.0/index.d.ts",
+    "https://esm.sh/matter-js?target=denonext": "https://esm.sh/matter-js@0.20.0?target=denonext",
+    "https://esm.sh/phaser@^3.55.2?target=denonext": "https://esm.sh/phaser@3.90.0?target=denonext",
+    "https://esm.sh/three-csg-ts@^3.1.10?target=denonext": "https://esm.sh/three-csg-ts@3.2.0?target=denonext",
+    "https://esm.sh/three?target=denonext": "https://esm.sh/three@0.178.0?target=denonext",
+    "https://esm.sh/three@^0.172.0?target=denonext": "https://esm.sh/three@0.172.0?target=denonext"
+  },
+  "remote": {
+    "https://deno.land/x/denoflate@1.2.1/mod.ts": "f5628e44b80b3d80ed525afa2ba0f12408e3849db817d47a883b801f9ce69dd6",
+    "https://deno.land/x/denoflate@1.2.1/pkg/denoflate.js": "b9f9ad9457d3f12f28b1fb35c555f57443427f74decb403113d67364e4f2caf4",
+    "https://deno.land/x/denoflate@1.2.1/pkg/denoflate_bg.wasm.js": "d581956245407a2115a3d7e8d85a9641c032940a8e810acbd59ca86afd34d44d",
+    "https://deno.land/x/esbuild@v0.25.5/mod.js": "57b9635116b05e6f214dea72d7f488c13808ee1b8055d96fa5da1c0dffe890cf",
+    "https://esm.sh/@enable3d/ammo-physics@0.26.1/denonext/ammo-physics.mjs": "a0118210f5ea181006298fb57a353f8b7791bc5c69f490e241321a4f356fc785",
+    "https://esm.sh/@enable3d/ammo-physics@0.26.1/dist/index.js": "5ae9becba70318fecf12a318b593bf524494d8c02e57738c8cf1804fb0837d2d",
+    "https://esm.sh/@enable3d/ammo-physics@0.26.1/dist/index?target=denonext": "5ae9becba70318fecf12a318b593bf524494d8c02e57738c8cf1804fb0837d2d",
+    "https://esm.sh/@enable3d/ammo-physics@0.26.1?target=denonext": "d309780f18023671636c739c7cf3d0f1fde2d866bf3cc44612652843db7e76f0",
+    "https://esm.sh/@enable3d/common@0.26.1/denonext/dist/applyMixins.mjs": "ba006d48e217fb0c5abd52d9fc931f5938b88895e779c02cb87f02f2f1aee4db",
+    "https://esm.sh/@enable3d/common@0.26.1/denonext/dist/customCanvas.mjs": "8e47006c6d15d7c5d8beb02964df855cf2630885e42db50ec3d6bbe6e38d5eb3",
+    "https://esm.sh/@enable3d/common@0.26.1/denonext/dist/defaultMaterial.mjs": "744aa1cb3f733dcf39c8cbbe57061a3a04f1d3f3aa288c778def3268e3460705",
+    "https://esm.sh/@enable3d/common@0.26.1/denonext/dist/extendedGroup.mjs": "3be208bddaa1ae431406357e03f320e0eb8cefed11f897bbf06a8ea7f2516387",
+    "https://esm.sh/@enable3d/common@0.26.1/denonext/dist/extendedMesh.mjs": "d8978249f3447a8f14d06a3dbd024b4a7f35d4773193014044d1131cd1fa0e4b",
+    "https://esm.sh/@enable3d/common@0.26.1/denonext/dist/extendedObject3D.mjs": "45f1a47c67100b92c09ecb056af37d7d0f638ad193ee37bb1bb5b3eb326f127b",
+    "https://esm.sh/@enable3d/common@0.26.1/denonext/dist/factories.mjs": "a329f005900f3935cf110c49d83fdf4972d726344eaf34818463df8d23e28f4f",
+    "https://esm.sh/@enable3d/common@0.26.1/denonext/dist/logger.mjs": "b15b26dae326b813ec531e35e04d839a8fb03cc15d18bf82e972f84007a6d7e8",
+    "https://esm.sh/@enable3d/common@0.26.1/denonext/dist/misc/firstPersonControls.mjs": "a665c5810995d23d730583085ecc0feba049bdc2068ce64dbf70b2a1153d6f0b",
+    "https://esm.sh/@enable3d/common@0.26.1/denonext/dist/misc/joystick.mjs": "e5b65512e6a42fb896d97cf6160dc1eff3eddeaef5819d4da61f8ac0f58957d5",
+    "https://esm.sh/@enable3d/common@0.26.1/denonext/dist/misc/pointerDrag.mjs": "1a945a7d53fb15cf607b32b6f8e0f63ec4dccb0245298bb1e7b5584dbb2bb43d",
+    "https://esm.sh/@enable3d/common@0.26.1/denonext/dist/misc/pointerLock.mjs": "8eaa9534d5a137000d212ea06315a1144567c10282f297070bb1793e1a75e0d4",
+    "https://esm.sh/@enable3d/common@0.26.1/denonext/dist/misc/thirdPersonControls.mjs": "17c3fdb75b0edcb4892549a8ad8a53cea996730acfb2159fcf60a917c50d0118",
+    "https://esm.sh/@enable3d/common@0.26.1/denonext/dist/physicsBody.mjs": "9a20719032e0ac182275dd8420f52cc3c1c0e19afa87c02cc9ac37d27efeba7d",
+    "https://esm.sh/@enable3d/common@0.26.1/denonext/dist/physicsLoader.mjs": "02c7ec5c2d17025793d909ab71eb67fe039ec8ecd8a57ed4eb209ad7a4096ac6",
+    "https://esm.sh/@enable3d/common@0.26.1/denonext/dist/types.mjs": "c12511984415d66d1be2d63b974fe677e107a955ee79e8ba615eb28ef2261b25",
+    "https://esm.sh/@enable3d/common@0.26.1/denonext/dist/wasmLoader.mjs": "b3c3dcbc7f4735e5d625eb4c6c5d338f24850fafb6f6c6bbd725134487e264d8",
+    "https://esm.sh/@enable3d/common@0.26.1/dist/applyMixins?target=denonext": "29c8268638edff98451a2b93c221e0bd0b9f7a5d75eeafb373f670f0c40dd03d",
+    "https://esm.sh/@enable3d/common@0.26.1/dist/customCanvas.js": "0d47d290f1cf05033f91464ccfc9b0700e668c7cb16f4eb63a1d9a7e303ce10b",
+    "https://esm.sh/@enable3d/common@0.26.1/dist/customCanvas?target=denonext": "0d47d290f1cf05033f91464ccfc9b0700e668c7cb16f4eb63a1d9a7e303ce10b",
+    "https://esm.sh/@enable3d/common@0.26.1/dist/defaultMaterial.js": "d0652afe299ee159f79045ee92b8990e0b374a9f9b6f08744d3ced747bc181f3",
+    "https://esm.sh/@enable3d/common@0.26.1/dist/defaultMaterial?target=denonext": "d0652afe299ee159f79045ee92b8990e0b374a9f9b6f08744d3ced747bc181f3",
+    "https://esm.sh/@enable3d/common@0.26.1/dist/extendedGroup.js": "ff1bee5d91fd31c277e95e137fd9efea602732a65e31d0e15850059a1b525534",
+    "https://esm.sh/@enable3d/common@0.26.1/dist/extendedGroup?target=denonext": "ff1bee5d91fd31c277e95e137fd9efea602732a65e31d0e15850059a1b525534",
+    "https://esm.sh/@enable3d/common@0.26.1/dist/extendedMesh.js": "ae14915ba7a5f68e08c6a0595e28e25b26e25191f7016e38b95d55f7109a561c",
+    "https://esm.sh/@enable3d/common@0.26.1/dist/extendedMesh?target=denonext": "ae14915ba7a5f68e08c6a0595e28e25b26e25191f7016e38b95d55f7109a561c",
+    "https://esm.sh/@enable3d/common@0.26.1/dist/extendedObject3D.js": "890969e285e401bb903f50bc6970df1e3a85f3fa950a1a6e7c9a271c0b3bdd98",
+    "https://esm.sh/@enable3d/common@0.26.1/dist/extendedObject3D?target=denonext": "890969e285e401bb903f50bc6970df1e3a85f3fa950a1a6e7c9a271c0b3bdd98",
+    "https://esm.sh/@enable3d/common@0.26.1/dist/factories.js": "e8d94b95aeb7dc8d35caf6b40c7a9d357f9f6a8b68a866ff9b8d54d3f18982ab",
+    "https://esm.sh/@enable3d/common@0.26.1/dist/factories?target=denonext": "e8d94b95aeb7dc8d35caf6b40c7a9d357f9f6a8b68a866ff9b8d54d3f18982ab",
+    "https://esm.sh/@enable3d/common@0.26.1/dist/logger?target=denonext": "33f3479a63df40f2d25dfe268a4d1315d38c14fcd8bbe8db9e93a8ab080f0eb9",
+    "https://esm.sh/@enable3d/common@0.26.1/dist/misc/firstPersonControls.js": "01b90957cefe9d8624f515998aec6ad13b5cc6afa4c45f4e9ceaf55c77843073",
+    "https://esm.sh/@enable3d/common@0.26.1/dist/misc/firstPersonControls?target=denonext": "01b90957cefe9d8624f515998aec6ad13b5cc6afa4c45f4e9ceaf55c77843073",
+    "https://esm.sh/@enable3d/common@0.26.1/dist/misc/joystick.js": "0b76d7756c37283287cdf38da5733f628a5c2332d06dc68251eed0d1be05a480",
+    "https://esm.sh/@enable3d/common@0.26.1/dist/misc/joystick?target=denonext": "0b76d7756c37283287cdf38da5733f628a5c2332d06dc68251eed0d1be05a480",
+    "https://esm.sh/@enable3d/common@0.26.1/dist/misc/pointerDrag.js": "c968850a820cca85fc3d8ccd01138d635f535027dadb237ed8bb9506a93ae193",
+    "https://esm.sh/@enable3d/common@0.26.1/dist/misc/pointerDrag?target=denonext": "c968850a820cca85fc3d8ccd01138d635f535027dadb237ed8bb9506a93ae193",
+    "https://esm.sh/@enable3d/common@0.26.1/dist/misc/pointerLock.js": "89488ebd70fea1319b02cac1b0097012a44e2a452e1ee71aaad60067c6b068c5",
+    "https://esm.sh/@enable3d/common@0.26.1/dist/misc/pointerLock?target=denonext": "89488ebd70fea1319b02cac1b0097012a44e2a452e1ee71aaad60067c6b068c5",
+    "https://esm.sh/@enable3d/common@0.26.1/dist/misc/thirdPersonControls.js": "5b68d8c454475729959ba229570d848d40d831e19facb470e46acab63ce8f251",
+    "https://esm.sh/@enable3d/common@0.26.1/dist/misc/thirdPersonControls?target=denonext": "5b68d8c454475729959ba229570d848d40d831e19facb470e46acab63ce8f251",
+    "https://esm.sh/@enable3d/common@0.26.1/dist/physicsBody.js": "7160958d05621af3afdfc58bc5397cd9ec5226ff85d21fa6cac08dc311bb31c4",
+    "https://esm.sh/@enable3d/common@0.26.1/dist/physicsBody?target=denonext": "7160958d05621af3afdfc58bc5397cd9ec5226ff85d21fa6cac08dc311bb31c4",
+    "https://esm.sh/@enable3d/common@0.26.1/dist/physicsLoader.js": "51d755a1a9c67587fd6160b985cb825836e8b1cec626ae0b71031226f87a195f",
+    "https://esm.sh/@enable3d/common@0.26.1/dist/physicsLoader?target=denonext": "51d755a1a9c67587fd6160b985cb825836e8b1cec626ae0b71031226f87a195f",
+    "https://esm.sh/@enable3d/common@0.26.1/dist/types.js": "2e5f34909251242d327fa72a72eaf15c8fb85ac9255139479b1557e773ba818f",
+    "https://esm.sh/@enable3d/common@0.26.1/dist/types?target=denonext": "2e5f34909251242d327fa72a72eaf15c8fb85ac9255139479b1557e773ba818f",
+    "https://esm.sh/@enable3d/common@0.26.1/dist/wasmLoader?target=denonext": "4d55ef89c8edc046729e7e7ba135222be18db4b45261d0bef86bba8f0fc8d98a",
+    "https://esm.sh/@enable3d/phaser-extension@0.26.1": "609605037536dff9a8e8ee50fab61fdaeb9d7db7c5a087d9f94588fcf9086be3",
+    "https://esm.sh/@enable3d/phaser-extension@0.26.1/denonext/phaser-extension.bundle.mjs": "8201fbe9cdaffdadeb3c94e2c219c9ef555d8634699544b19da4992a61405c9c",
+    "https://esm.sh/@enable3d/phaser-extension@0.26.1/denonext/phaser-extension.mjs": "2d048916bef258bc025a54265560e67c764f80858d746465f1159fa785b208f9",
+    "https://esm.sh/@enable3d/phaser-extension@0.26.1?standalone": "d23158105d40119f17e550be7763ef1ad3beeb2c6cd0fdc7e8b0ea36649550e7",
+    "https://esm.sh/@enable3d/three-graphics@0.26.1/denonext/dist/csg/index.mjs": "e24eb05a437711e5d0e67cfd8a0361ca080a86fc22d04a46d1aafec417db4638",
+    "https://esm.sh/@enable3d/three-graphics@0.26.1/denonext/dist/flat/index.mjs": "17dfcd901ffa3e6a2f2366b0091115186faaed9bfaf62739b412d10d974d96f4",
+    "https://esm.sh/@enable3d/three-graphics@0.26.1/denonext/dist/plugins/index.mjs": "1da2004e294c38c7b87c05c561435f1fc4974f007ca1fc27eb5a07098deedb6a",
+    "https://esm.sh/@enable3d/three-graphics@0.26.1/denonext/dist/plugins/mixers.mjs": "ca4941c24dbabc824db89da43486b4a43ef25d54b8d428e24a9cc4c987e9f720",
+    "https://esm.sh/@enable3d/three-graphics@0.26.1/denonext/dist/plugins/warpSpeed.mjs": "7911f02ad205323633cd06d53b2c2a1ccd99711592e97c8581e8154916c84322",
+    "https://esm.sh/@enable3d/three-graphics@0.26.1/denonext/three-graphics.mjs": "43a6e40c617bc02c985a84a04c4ee03bf5e61adff7633d4e94cf0ad7533b2deb",
+    "https://esm.sh/@enable3d/three-graphics@0.26.1/dist/csg/index.js": "d54bba8cbe2b40b0be8d87910f97b55f1552761914dd52d93dd4d810b0bf307e",
+    "https://esm.sh/@enable3d/three-graphics@0.26.1/dist/csg/index?target=denonext": "d54bba8cbe2b40b0be8d87910f97b55f1552761914dd52d93dd4d810b0bf307e",
+    "https://esm.sh/@enable3d/three-graphics@0.26.1/dist/flat/index.js": "3c6741be32b712351ef45943b9351a2be18696ce9fa8dbd65814713edbf9cbf3",
+    "https://esm.sh/@enable3d/three-graphics@0.26.1/dist/flat/index?target=denonext": "3c6741be32b712351ef45943b9351a2be18696ce9fa8dbd65814713edbf9cbf3",
+    "https://esm.sh/@enable3d/three-graphics@0.26.1/dist/plugins/index.js": "21274cc566355e6037e6da0864fb04e9edb2725d3f563a3fa73ba9dfa7da2933",
+    "https://esm.sh/@enable3d/three-graphics@0.26.1/dist/plugins/index?target=denonext": "21274cc566355e6037e6da0864fb04e9edb2725d3f563a3fa73ba9dfa7da2933",
+    "https://esm.sh/@enable3d/three-graphics@0.26.1/dist/plugins/mixers.js": "0c37b8ae647964dce9705dd332c2e19157f1f3eaa2620a63e806a66da888d510",
+    "https://esm.sh/@enable3d/three-graphics@0.26.1/dist/plugins/warpSpeed.js": "d37fdfb5a3a876c39331f8009f6ddf9f9361b336daa8c972a7d1a0421fc088f0",
+    "https://esm.sh/@enable3d/three-graphics@0.26.1?target=denonext": "a1b56264ad191e128256fe509db633e09a0cf45469c5dedc204529151eebc2eb",
+    "https://esm.sh/@types/three@0.171.0/examples/jsm/controls/OrbitControls.js": "fabf6997a3adf11e45d11e3c4d58d0634ab98f9d72f3116f3694123818ccd457",
+    "https://esm.sh/@types/three@0.171.0/examples/jsm/loaders/GLTFLoader.js": "fabf6997a3adf11e45d11e3c4d58d0634ab98f9d72f3116f3694123818ccd457",
+    "https://esm.sh/@types/three@0.171.0/examples/jsm/loaders/SVGLoader.js": "fabf6997a3adf11e45d11e3c4d58d0634ab98f9d72f3116f3694123818ccd457",
+    "https://esm.sh/@types/three@0.171.0/examples/jsm/objects/Water2.js": "fabf6997a3adf11e45d11e3c4d58d0634ab98f9d72f3116f3694123818ccd457",
+    "https://esm.sh/@types/three@0.171.0/examples/jsm/postprocessing/EffectComposer.js": "fabf6997a3adf11e45d11e3c4d58d0634ab98f9d72f3116f3694123818ccd457",
+    "https://esm.sh/@types/three@0.171.0/examples/jsm/postprocessing/GlitchPass.js": "fabf6997a3adf11e45d11e3c4d58d0634ab98f9d72f3116f3694123818ccd457",
+    "https://esm.sh/@types/three@0.171.0/examples/jsm/postprocessing/RenderPass.js": "fabf6997a3adf11e45d11e3c4d58d0634ab98f9d72f3116f3694123818ccd457",
+    "https://esm.sh/@types/three@0.171.0/examples/jsm/postprocessing/ShaderPass.js": "fabf6997a3adf11e45d11e3c4d58d0634ab98f9d72f3116f3694123818ccd457",
+    "https://esm.sh/@types/three@0.171.0/examples/jsm/shaders/DotScreenShader.js": "fabf6997a3adf11e45d11e3c4d58d0634ab98f9d72f3116f3694123818ccd457",
+    "https://esm.sh/@types/three@0.171.0/examples/jsm/webxr/XRControllerModelFactory.js": "fabf6997a3adf11e45d11e3c4d58d0634ab98f9d72f3116f3694123818ccd457",
+    "https://esm.sh/@yandeu/events@0.0.5/denonext/events.mjs": "1e33b862a58ef996623e6079e72d08cd8f9cceaf3ad21abfa0c932f168d1491d",
+    "https://esm.sh/@yandeu/events@0.0.7/denonext/events.mjs": "3ed3bfff9b9577b488f791e5a4f340a4d5714fedf95dc640461cda189341abac",
+    "https://esm.sh/@yandeu/tap@0.0.3/denonext/tap.mjs": "cd9704c64ce410d52f828842bdf23c5620ab309afb24018fc13d9612f1763b11",
+    "https://esm.sh/matter-js@0.17.1/denonext/matter-js.mjs": "897d9f51ced42a1c0342732ab661fd297ff9a2411fb803df41ecb15d90b5bdb2",
+    "https://esm.sh/matter-js@0.20.0/denonext/matter-js.mjs": "20e7c21c9537a9fec3f899b241758487297a84f97738743183272dbacbcdc58a",
+    "https://esm.sh/matter-js@0.20.0?target=denonext": "068812e2794a220ae2415dd95e1b7602ef19c771eb04c139b6c58797b80dd508",
+    "https://esm.sh/meshoptimizer@0.18.1/denonext/meshopt_decoder.module.mjs": "b3297feb646243c8d7c5c3035151922e5c8eb9afe2a8461a65d02b1ef4827354",
+    "https://esm.sh/meshoptimizer@0.18.1/meshopt_decoder.module.js": "36d53db0d06d5baae70956bec52a5ae33173cfb1631064abb9c250382225c7a1",
+    "https://esm.sh/phaser@3.90.0": "ffb002ac5ce87f87a06e5f1f060613c3db767a9446501f42214984a391ccde2c",
+    "https://esm.sh/phaser@3.90.0/denonext/phaser.mjs": "96ff34c60b3a6e84d585613f8c31dd005891ceb35f03f7603d565e7052cf494f",
+    "https://esm.sh/phaser@3.90.0?target=denonext": "ffb002ac5ce87f87a06e5f1f060613c3db767a9446501f42214984a391ccde2c",
+    "https://esm.sh/phaser@4.0.0-rc.4": "b4bdc8347c270e161ca240a12c67acd3f04e48d75e47d6ea6fd1790dad2ed612",
+    "https://esm.sh/phaser@4.0.0-rc.4/denonext/phaser.mjs": "d2a4786547a40d7c1788efbafe0601f21294adc0a92cc5ef23c555ca00a6d74b",
+    "https://esm.sh/three-csg-ts@3.2.0/denonext/three-csg-ts.mjs": "66438b249ebdc36efa35ef7a17a153b1b41b52f596ca661744e629455ac7d0ee",
+    "https://esm.sh/three-csg-ts@3.2.0?target=denonext": "c2d0ad9416fadafaf0e1a73a08cd5ceed4f12a781a714ee1b3ceabe5de442e87",
+    "https://esm.sh/three@0.171.0/denonext/build/three.core.mjs": "3d45d212539dd3d0cc29239bead9ddc7caa0e8bc54f4ce563761609436ebd837",
+    "https://esm.sh/three@0.171.0/denonext/examples/jsm/controls/OrbitControls.mjs": "10b300c004ce4e2a314c4e68b5ca0a245084dcf9b9e0dfa4efb9100e6745002a",
+    "https://esm.sh/three@0.171.0/denonext/examples/jsm/geometries/ConvexGeometry.mjs": "45cd2beeec83d22e975adb06b5e44e50d04771838801a70c8d96d6cb388e1f2a",
+    "https://esm.sh/three@0.171.0/denonext/examples/jsm/loaders/FBXLoader.mjs": "4437eaf114da168347a449a4ee79e5bc93899acc98fe0c8c4d25b7e7c333ab06",
+    "https://esm.sh/three@0.171.0/denonext/examples/jsm/loaders/GLTFLoader.mjs": "1455e1e4e1d26c4b5f0b57f663b04d93b5ca48e97ba2f78c3d6941809d4d762a",
+    "https://esm.sh/three@0.171.0/denonext/examples/jsm/loaders/SVGLoader.mjs": "7e9c55b8211e457276fbdb137016b2734b6abd98aeb6de63fd215e3f4122f504",
+    "https://esm.sh/three@0.171.0/denonext/examples/jsm/objects/Water2.mjs": "59ef7e834201aa973706d54151b5d6feed1ed0d966f489427bacbbc52ec1cd9e",
+    "https://esm.sh/three@0.171.0/denonext/examples/jsm/postprocessing/EffectComposer.mjs": "0e2277fdbf6f12e5bcad28db61fb5d3975dd578ed647380677be81024ead9dff",
+    "https://esm.sh/three@0.171.0/denonext/examples/jsm/postprocessing/GlitchPass.mjs": "f5a637236be6e34999eb88ccf5ec34b9a750b182198e122c752d9ae2779192a7",
+    "https://esm.sh/three@0.171.0/denonext/examples/jsm/postprocessing/RenderPass.mjs": "9dc6f933b65899a3e948590b7b4a9ac274476af193c1f8784ed66149f485c795",
+    "https://esm.sh/three@0.171.0/denonext/examples/jsm/postprocessing/ShaderPass.mjs": "176310f33c1a0092d3f954a4a0973301691290c30bed1eca49a2d3e44571ae52",
+    "https://esm.sh/three@0.171.0/denonext/examples/jsm/shaders/DotScreenShader.mjs": "dfb0833bf01d3d12f619582183883412a5b544c57b9763b9879f1892382b41bf",
+    "https://esm.sh/three@0.171.0/denonext/examples/jsm/webxr/VRButton.mjs": "fc9fe9c6857efd50d15f234ab5e02f5e49de4e4b97b0284e117202b3f975ae79",
+    "https://esm.sh/three@0.171.0/denonext/examples/jsm/webxr/XRControllerModelFactory.mjs": "18f7cb5d3360de8616d56ef8c66af0d4fb509cfddc0e9d8d6edbb17ccd2446cb",
+    "https://esm.sh/three@0.171.0/denonext/three.mjs": "ed8848bfc6a241f1b2a52a755fb274ba136de0c65cf29fdc9fd2226f22a3fd4d",
+    "https://esm.sh/three@0.172.0/denonext/build/three.core.mjs": "a6d71a0e0a905894dca6214b855a6c1126359b11868f4d0f15c02749d857950e",
+    "https://esm.sh/three@0.172.0/denonext/three.mjs": "dbb60714d0af7ce33f6c4df23f20fb838e5f3d5ce0b98014ec4c816ecf0230b0",
+    "https://esm.sh/three@0.172.0?target=denonext": "763103453d7e23336e7a78d3294c5d4729bf3a29c80bbee3fdbac556f1c6d1be",
+    "https://esm.sh/three@0.178.0/denonext/build/three.core.mjs": "9be8de1f198b6122ef9ef941af443afec8322285e52e45046fac6918e7f051ba",
+    "https://esm.sh/three@0.178.0/denonext/three.mjs": "4c4e06f074c1910ff81cb80a9a211932006e9472012484621e4025dbd136818c",
+    "https://esm.sh/three@0.178.0/denonext/webgpu.mjs": "4c45f69090f222891613eeff248fc09835c2de909db98b2309ab48f34f6ea320",
+    "https://esm.sh/three@0.178.0/webgpu": "a65342d11d68856b8a84a2d989f8586d9eb4d398570506f37b3ab26c54e5829e",
+    "https://esm.sh/three@0.178.0?target=denonext": "a410acb6314f678968ee1ef757f7e5cb9c0b8e0778a5be6880971c22d3d3d21c"
+  },
+  "workspace": {
+    "dependencies": [
+      "jsr:@hono/hono@^4.8.3",
+      "jsr:@std/assert@1",
+      "npm:@enable3d/phaser-extension@~0.26.1",
+      "npm:phaser3-rex-plugins@*"
+    ]
+  }
+}
