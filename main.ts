@@ -194,7 +194,8 @@ async function requestHandler(request: Request): Promise<Response> {
   // Construct file path
   const filePath = `${CONFIG.publicDir}/${pathname}`;
 
-  console.log(`Serving: ${filePath}`);
+  // For debug only
+  // console.log(`Serving: ${filePath}`); 
   return await serveFile(filePath);
 }
 

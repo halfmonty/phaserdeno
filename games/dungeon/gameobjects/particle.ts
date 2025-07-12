@@ -1,5 +1,4 @@
 export default class Dust extends Phaser.GameObjects.Sprite {
-
 	constructor(scene: Phaser.Scene, x: number, y: number, name = 'dust', tween = false) {
 		super(scene, x, y, name);
 		this.scene = scene;

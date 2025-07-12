@@ -1,19 +1,31 @@
 import Phaser from 'phaser';
-// import PhaserMatterCollisionPlugin from 'https://esm.sh/phaser-matter-collision-plugin';
+import PhaserMatterCollisionPlugin from 'phaser-matter-collision-plugin';
 import Bootloader from './scenes/bootloader.ts';
 import Outro from './scenes/outro.ts';
 import Splash from './scenes/splash.ts';
 import Transition from './scenes/transition.ts';
 import Game from './scenes/game.ts';
 
-// const pluginConfig = {
-//   // The plugin class:
-//   plugin: PhaserMatterCollisionPlugin,
-//   // Where to store in Scene.Systems, e.g. scene.sys.matterCollision:
-//   key: "matterCollision" as "matterCollision",
-//   // Where to store in the Scene, e.g. scene.matterCollision:
-//   mapping: "matterCollision" as "matterCollision",
-// };
+const pluginConfig = {
+  // The plugin class:
+  plugin: PhaserMatterCollisionPlugin.PhaserMatterCollisionPlugin,
+  // Where to store in Scene.Systems, e.g. scene.sys.matterCollision:
+  key: "matterCollision" as const,
+  // Where to store in the Scene, e.g. scene.matterCollision:
+  mapping: "matterCollision" as const
+};
+
+declare module "phaser" {
+  interface Scene {
+    [pluginConfig.mapping]: PhaserMatterCollisionPlugin.PhaserMatterCollisionPlugin;
+  }
+  /* eslint-disable @typescript-eslint/no-namespace */
+  namespace Scenes {
+    interface Systems {
+      [pluginConfig.key]: PhaserMatterCollisionPlugin.PhaserMatterCollisionPlugin;
+    }
+  }
+}
 
 const config: Phaser.Types.Core.GameConfig = {
 	width: 600,
@@ -31,9 +43,15 @@ const config: Phaser.Types.Core.GameConfig = {
         }
 	},
 	plugins: {
-        scene: []
+        scene: [
+			{
+				plugin: PhaserMatterCollisionPlugin,
+				key: "matterCollision",
+				mapping: "matterCollision",
+			}
+		]
     },
 	scene: [Bootloader, Splash, Transition, Game, Outro],
 };
 
-export const Dungeon = new Phaser.Game(config);
+export const Dungeon = () => new Phaser.Game(config);

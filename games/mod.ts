@@ -18,7 +18,7 @@ const Games: Record<string, ()=>void> = {
     mars: Mars,
     wallhammer: Wallhammer,
     starshake: StarShake,
-    // dungeon: Dungeon,
+    dungeon: Dungeon,
     blastemup: Blastemup,
     fate: Fate
 } as const;

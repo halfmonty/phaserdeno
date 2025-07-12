@@ -1,4 +1,5 @@
 import Bubble from './bubble.ts';
+import PhaserMatterCollisionPlugin from 'phaser-matter-collision-plugin';
 
 export default class Bat extends Phaser.Physics.Matter.Sprite {
 	declare body: Phaser.Physics.Arcade.Body;
@@ -6,6 +7,7 @@ export default class Bat extends Phaser.Physics.Matter.Sprite {
     startX: number;
     direction: number;
     dead: boolean = false;
+	unsubscribeBatCollide!: PhaserMatterCollisionPlugin.Unsubscribe;
 
 	constructor(
 		scene: Phaser.Scene,
@@ -24,6 +26,7 @@ export default class Bat extends Phaser.Physics.Matter.Sprite {
 		this.setIgnoreGravity(true);
 		this.addCollisions();
 		this.init();
+		PhaserMatterCollisionPlugin.PhaserMatterCollisionPlugin
 	}
 
 	/*
@@ -59,14 +62,14 @@ export default class Bat extends Phaser.Physics.Matter.Sprite {
     We add the collision event to the scene so we can handle the collision with the bat and the bubble.
   */
 	addCollisions() {
-		// this.unsubscribeBatCollide = this.scene.matterCollision.addOnCollideStart({
-		// 	objectA: this,
-		// 	callback: this.onBatCollide,
-		// 	context: this,
-		// });
+		this.unsubscribeBatCollide = this.scene.matterCollision.addOnCollideStart({
+			objectA: this,
+			callback: this.onBatCollide,
+			context: this,
+		});
 	}
 
-	onBatCollide({ _gameObjectA, gameObjectB }: { _gameObjectA: Bat, gameObjectB: Phaser.GameObjects.GameObject}) {
+	onBatCollide: PhaserMatterCollisionPlugin.CollideCallback<this, PhaserMatterCollisionPlugin.CollidingObject> = ({ gameObjectB }) => {
 		if (gameObjectB instanceof Bubble) {
 			gameObjectB.load('bat');
 			this.destroy();

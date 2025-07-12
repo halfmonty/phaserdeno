@@ -1,6 +1,7 @@
 import Fireball from './fireball.ts';
 import Bubble from './bubble.ts';
 import Game from '../scenes/game.ts';
+import PhaserMatterCollisionPlugin from 'phaser-matter-collision-plugin';
 
 export default class Wizard extends Phaser.Physics.Matter.Sprite {
     declare scene: Game;
@@ -10,6 +11,7 @@ export default class Wizard extends Phaser.Physics.Matter.Sprite {
     timer!: Phaser.Time.TimerEvent;
     delayedTurn?: Phaser.Time.TimerEvent;
     fireball?: Fireball;
+	unsubscribeBatCollide!: PhaserMatterCollisionPlugin.Unsubscribe;
 
 	constructor(scene: Phaser.Scene, x: number, y: number, texture = 'wizard', _ground?: Phaser.Tilemaps.TilemapLayer) {
 		super(scene.matter.world, x, y, texture, 0);
@@ -51,17 +53,17 @@ This function inits the wizard. It creates the animations and the update event. 
 As we did with the player and the bat, we create this callback to handle the collision with the bubble.
   */
 	addCollisions() {
-		// this.unsubscribeBatCollide = this.scene.matterCollision.addOnCollideStart({
-		// 	objectA: this,
-		// 	callback: this.onWizardCollide,
-		// 	context: this,
-		// });
+		this.unsubscribeBatCollide = this.scene.matterCollision.addOnCollideStart({
+			objectA: this,
+			callback: this.onWizardCollide,
+			context: this,
+		});
 	}
 
 	/*
 This will be called when the bubble hits the wizard. We "load" the wizard inside the bubble and destroy the wizard.
   */
-	onWizardCollide({ gameObjectA, gameObjectB }) {
+	onWizardCollide: PhaserMatterCollisionPlugin.CollideCallback<this, PhaserMatterCollisionPlugin.CollidingObject> = ({ gameObjectB }) => {
 		if (gameObjectB instanceof Bubble) {
 			gameObjectB.load('wizard');
 			this.destroy();
@@ -73,12 +75,8 @@ The wizard will try to shoot directly at the player. It will shoot a fireball an
   */
 	directShot() {
 		this.scene.playAudio('fireball');
-		const distance = Phaser.Math.Distance.BetweenPoints(
-			this.scene.player as any,
-			this,
-		);
 		this.anims.play('wizardshot', true);
-		const fireball = new Fireball(this.scene, this.x, this.y, this.direction);
+		new Fireball(this.scene, this.x, this.y, this.direction);
 		this.delayedTurn = this.scene.time.delayedCall(
 			1000,
 			() => {

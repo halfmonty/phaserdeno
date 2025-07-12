@@ -1,7 +1,13 @@
 import Player from '../gameobjects/player.ts';
 import DungeonGenerator from '../gameobjects/dungeon_generator.ts';
 import Coin from '../gameobjects/coin.ts';
-import key from '../gameobjects/key.ts';
+import Key from '../gameobjects/key.ts';
+import PhaserMatterCollisionPlugin from 'phaser-matter-collision-plugin';
+import Bat from '../gameobjects/bat.ts';
+import Wizard from '../gameobjects/wizard.ts';
+import Fireball from '../gameobjects/fireball.ts';
+
+type Foe = Bat | Wizard | Fireball;
 
 export default class Game extends Phaser.Scene {
     player: Player | null;
@@ -16,11 +22,12 @@ export default class Game extends Phaser.Scene {
     height!: number;
     center_width!: number;
     center_height!: number;
-    dungeon: any;
+    dungeon!: DungeonGenerator;
     timer!: Phaser.Time.TimerEvent;
     trailLayer!: Phaser.GameObjects.Layer;
     audios!: Record<string, Phaser.Sound.NoAudioSound | Phaser.Sound.HTML5AudioSound | Phaser.Sound.WebAudioSound>;
-	gameOver: any;
+	unsubscribePlayerCollide!: PhaserMatterCollisionPlugin.Unsubscribe;
+	gameOver: boolean = false;
 
 	constructor() {
 		super({ key: 'game' });
@@ -118,38 +125,39 @@ export default class Game extends Phaser.Scene {
   This method sets up the collisions between the player and anything else. Basically, it sets a callback function that will be called when the player collides with something.
   */
 	addCollisions() {
-		// this.unsubscribePlayerCollide = this.matterCollision.addOnCollideStart({
-		// 	objectA: this.player?.sprite,
-		// 	callback: this.onPlayerCollide,
-		// 	context: this,
-		// });
+		this.unsubscribePlayerCollide = this.matterCollision.addOnCollideStart({
+			objectA: this.player!.sprite,
+			callback: this.onPlayerCollide,
+			context: this,
+		});
 
-		// this.matter.world.on('collisionstart', (event:any) => {
-		// 	event.pairs.forEach((pair:any) => {
-		// 		const bodyA = pair.bodyA;
-		// 		const bodyB = pair.bodyB;
-		// 	});
-		// });
+		this.matter.world.on('collisionstart', (event: PhaserMatterCollisionPlugin.CollisionEvent) => {
+			event.pairs.forEach((pair) => {
+				pair.bodyA;
+				pair.bodyB;
+			});
+		});
 	}
 
 	/*
   This is the callback that we call when the player collides with something. We check the label of the object that the player collides with and call the corresponding method.
   */
-	onPlayerCollide({ gameObjectA, gameObjectB }) {
+	onPlayerCollide:PhaserMatterCollisionPlugin.CollideCallback<PhaserMatterCollisionPlugin.CollidingObject> = ({ gameObjectB }) => {
 		if (!gameObjectB) return;
-		if (gameObjectB.label === 'coin') this.playerPicksCoin(gameObjectB);
-		if (gameObjectB.label === 'keys') this.playerPicksKey(gameObjectB);
-		if (gameObjectB.label === 'bat') this.playerHitsFoe(gameObjectB);
-		if (gameObjectB.label === 'wizard') this.playerHitsFoe(gameObjectB);
-		if (gameObjectB.label === 'fireball') this.playerHitsFoe(gameObjectB);
+		const gameObject = gameObjectB as PhaserMatterCollisionPlugin.CollidingObject & { label: string};
+		if (gameObject.label === 'coin') this.playerPicksCoin(gameObjectB as Coin);
+		if (gameObject.label === 'keys') this.playerPicksKey(gameObjectB as Key);
+		if (gameObject.label === 'bat') this.playerHitsFoe(gameObjectB as Bat);
+		if (gameObject.label === 'wizard') this.playerHitsFoe(gameObjectB as Wizard);
+		if (gameObject.label === 'fireball') this.playerHitsFoe(gameObjectB as Fireball);
 		if (!(gameObjectB instanceof Phaser.Tilemaps.Tile)) return;
 
 		const tile = gameObjectB;
 
-		// if (tile.properties.isLethal) {
-		// 	this.unsubscribePlayerCollide();
-		// 	this.restartScene();
-		// }
+		if (tile.properties.isLethal) {
+			this.unsubscribePlayerCollide();
+			this.restartScene();
+		}
 	}
 
 	/*
@@ -165,7 +173,7 @@ export default class Game extends Phaser.Scene {
 	/*
   Same as the previous one but with the key.
   */
-	playerPicksKey(key: key) {
+	playerPicksKey(key: Key) {
 		this.updateKeys();
 		this.showPoints(
 			key.x,
@@ -179,7 +187,7 @@ export default class Game extends Phaser.Scene {
 	/*
   Unless the player is invincible (blinking at the beginning), this is called when the player hits any foe. It kills the player, destroys the foe, and restarts the scene.
   */
-	playerHitsFoe(foe: any) {
+	playerHitsFoe(foe: Foe) {
 		if (this.player?.invincible) return;
 		this.player?.explosion();
 		foe.destroy();

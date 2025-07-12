@@ -1,4 +1,4 @@
-export default class key extends Phaser.Physics.Matter.Sprite {
+export default class Key extends Phaser.Physics.Matter.Sprite {
     label: string;
     tween?: Phaser.Tweens.Tween;
 

@@ -1,6 +1,7 @@
 import Game from '../scenes/game.ts';
 import Bubble from './bubble.ts';
 import Dust from './particle.ts';
+import PhaserMatterCollisionPlugin from 'phaser-matter-collision-plugin';
 
 export default class Player {
 	declare scene: Game;
@@ -14,7 +15,7 @@ export default class Player {
     shootCooldownTimer: Phaser.Time.TimerEvent | null;
     onWall: boolean;
     sprite!: Phaser.Physics.Matter.Sprite;
-    sensors!: { bottom: any, left: any, right: any };
+    sensors!: { bottom: MatterJS.BodyType, left: MatterJS.BodyType, right: MatterJS.BodyType };
     cursor!: Phaser.Types.Input.Keyboard.CursorKeys;
     W!: Phaser.Input.Keyboard.Key;
     A!: Phaser.Input.Keyboard.Key;
@@ -49,34 +50,35 @@ export default class Player {
 		this.sprite = this.scene.matter.add.sprite(0, 0, 'player', 0);
 
 		// Native Matter modules
-		// const { Body, Bodies } = Phaser.Physics.Matter.Matter;
+		const Body = this.scene.matter.body;
+		const Bodies = this.scene.matter.bodies;
 		const { width: w, height: h } = this.sprite;
 
-		// const mainBody = Bodies.rectangle(0, 5, w - 14, h - 10, {
-		// 	chamfer: { radius: 10 },
-		// });
-		// this.sensors = {
-		// 	bottom: Bodies.rectangle(0, h * 0.5, w * 0.25, 2, { isSensor: true }),
-		// 	left: Bodies.rectangle(-w * 0.35, 0, 2, h * 0.5, { isSensor: true }),
-		// 	right: Bodies.rectangle(w * 0.35, 0, 2, h * 0.5, { isSensor: true }),
-		// };
-		// const compoundBody = Body.create({
-		// 	parts: [
-		// 		mainBody,
-		// 		this.sensors.bottom,
-		// 		this.sensors.left,
-		// 		this.sensors.right,
-		// 	],
-		// 	frictionStatic: 0,
-		// 	frictionAir: 0.02,
-		// 	friction: 0.1,
-		// 	render: { sprite: { xOffset: 0.5, yOffset: 0.5 } },
-		// });
-		// this.sprite
-		// 	.setExistingBody(compoundBody)
-		// 	.setFixedRotation()
-		// 	// Sets inertia to infinity so the player can't rotate
-		// 	.setPosition(x, y);
+		const mainBody = Bodies.rectangle(0, 5, w - 14, h - 10, {
+			chamfer: { radius: 10 },
+		});
+		this.sensors = {
+			bottom: Bodies.rectangle(0, h * 0.5, w * 0.25, 2, { isSensor: true }),
+			left: Bodies.rectangle(-w * 0.35, 0, 2, h * 0.5, { isSensor: true }),
+			right: Bodies.rectangle(w * 0.35, 0, 2, h * 0.5, { isSensor: true }),
+		};
+		const compoundBody = Body.create({
+			parts: [
+				mainBody,
+				this.sensors.bottom,
+				this.sensors.left,
+				this.sensors.right,
+			],
+			frictionStatic: 0,
+			frictionAir: 0.02,
+			friction: 0.1,
+			render: { sprite: { xOffset: 0.5, yOffset: 0.5 } },
+		});
+		this.sprite
+			.setExistingBody(compoundBody)
+			.setFixedRotation()
+			// Sets inertia to infinity so the player can't rotate
+			.setPosition(x, y);
 
 		this.addEvents();
 		this.addColliders();
@@ -97,16 +99,16 @@ export default class Player {
     These are the collider events that will be used to control the player. We use the MatterCollision plugin to detect collisions between the player and the walls. We also use the onSensorCollide method to detect collisions with the sensors that we added to the player. This is used to detect collisions with the walls and the ground.
   */
 	addColliders() {
-		// this.scene.matterCollision.addOnCollideStart({
-		// 	objectA: [this.sensors.bottom, this.sensors.left, this.sensors.right],
-		// 	callback: this.onSensorCollide,
-		// 	context: this,
-		// });
-		// this.scene.matterCollision.addOnCollideActive({
-		// 	objectA: [this.sensors.bottom, this.sensors.left, this.sensors.right],
-		// 	callback: this.onSensorCollide,
-		// 	context: this,
-		// });
+		this.scene.matterCollision.addOnCollideStart({
+			objectA: [this.sensors.bottom, this.sensors.left, this.sensors.right],
+			callback: this.onSensorCollide,
+			context: this,
+		});
+		this.scene.matterCollision.addOnCollideActive({
+			objectA: [this.sensors.bottom, this.sensors.left, this.sensors.right],
+			callback: this.onSensorCollide,
+			context: this,
+		});
 	}
 
 	/*
@@ -162,18 +164,20 @@ export default class Player {
 	/*
     This is the method that is called when the player collides with something. We use it to detect collisions with the walls and the ground. We also use it to detect collisions with the sensors that we added to the player. This is used to detect collisions with the walls and the ground.
   */
-	onSensorCollide({ bodyA, bodyB, pair }) {
-		// We only care about collisions with physical objects
+	onSensorCollide: PhaserMatterCollisionPlugin.CollideCallback<PhaserMatterCollisionPlugin.CollidingObject> = ({ bodyA, bodyB, pair }) => {
+		// @ts-ignore We only care about collisions with physical objects
 		if (bodyB.isSensor) return;
 		if (bodyA === this.sensors.left) {
 			this.friction();
 			this.onWall = true;
 			this.isTouching.left = true;
+			// @ts-ignore separation should exist but is missing from type
 			if (pair.separation > 0.5) this.sprite.x += pair.separation - 0.5;
 		} else if (bodyA === this.sensors.right) {
 			this.friction();
 			this.onWall = true;
 			this.isTouching.right = true;
+			// @ts-ignore separation should exist but is missing from type
 			if (pair.separation > 0.5) this.sprite.x -= pair.separation - 0.5;
 		} else if (bodyA === this.sensors.bottom) {
 			this.land();
@@ -265,7 +269,7 @@ export default class Player {
 			(Phaser.Input.Keyboard.JustDown(this.cursor.down) ||
 				Phaser.Input.Keyboard.JustDown(this.W))
 		) {
-			const offset = this.sprite.flipX ? 128 : -128;
+			const offset = this.sprite.flipX ? 64 : -64;
 			this.sprite.anims.play('playershot', true);
 			this.scene.playAudio('bubble');
 			this.canShoot = false;
@@ -296,8 +300,8 @@ export default class Player {
 			this.sensors.left,
 			this.sensors.right,
 		];
-		// this.scene.matterCollision.removeOnCollideStart({ objectA: sensors });
-		// this.scene.matterCollision.removeOnCollideActive({ objectA: sensors });
+		this.scene.matterCollision.removeOnCollideStart({ objectA: sensors });
+		this.scene.matterCollision.removeOnCollideActive({ objectA: sensors });
 
 		if (this.jumpCooldownTimer) this.jumpCooldownTimer.destroy();
 
@@ -322,7 +326,7 @@ Every time the player moves, we add a few dust particles to the scene. This is d
 	friction() {
 		Array(Phaser.Math.Between(2, 4))
 			.fill(0)
-			.forEach((i) => {
+			.forEach((_i) => {
 				new Dust(
 					this.scene,
 					this.sprite.x + Phaser.Math.Between(-8, 8),
@@ -335,7 +339,7 @@ Every time the player moves, we add a few dust particles to the scene. This is d
 		if (this.sprite.body && this.sprite.body.velocity.y < 1) return;
 		Array(Phaser.Math.Between(3, 6))
 			.fill(0)
-			.forEach((i) => {
+			.forEach((_i) => {
 				new Dust(
 					this.scene,
 					this.sprite.x + Phaser.Math.Between(-32, 32),
@@ -350,7 +354,7 @@ Every time the player moves, we add a few dust particles to the scene. This is d
 	explosion() {
 		Array(Phaser.Math.Between(10, 15))
 			.fill(0)
-			.forEach((i) => {
+			.forEach((_i) => {
 				new Dust(
 					this.scene,
 					this.sprite.x + Phaser.Math.Between(-32, 32),
@@ -362,7 +366,7 @@ Every time the player moves, we add a few dust particles to the scene. This is d
 	/*
     This is called when the player finishes the shooting animation. We use it to play the idle animation again.
   */
-	animationComplete(animation: Phaser.Animations.Animation, frame: Phaser.Animations.AnimationFrame) {
+	animationComplete(animation: Phaser.Animations.Animation, _frame: Phaser.Animations.AnimationFrame) {
 		if (animation.key === 'playershot') {
 			this.sprite.anims.play('playeridle', true);
 		}

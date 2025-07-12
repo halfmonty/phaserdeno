@@ -20,11 +20,11 @@ export default class SeeSaw {
     if(!platform.body) throw("");
     const constraint = scene.matter.constraint.create({
       pointA: { x: platform.x, y: platform.y },
-      bodyB: platform.body as any,
+      bodyB: platform.body as MatterJS.BodyType,
       length: 0,
     });
 
     scene.matter.world.add(constraint);
-    const sign = Math.random() < 0.5 ? -1 : 1;
+    // const sign = Math.random() < 0.5 ? -1 : 1;
   }
 }
