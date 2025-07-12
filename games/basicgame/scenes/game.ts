@@ -93,7 +93,7 @@ export default class Game extends Phaser.Scene {
         }).setOrigin(0.5);
     }
 
-    override update(time: number, delta: number): void {
+    override update(_time: number, _delta: number): void {
         if (this.cursors.left.isDown) {
             this.player.setVelocityX(-160);
 
@@ -125,7 +125,7 @@ export default class Game extends Phaser.Scene {
             this.stars.children.forEach((child) => {
                 (child as Phaser.Physics.Arcade.Sprite).enableBody(
                     true,
-                    (child as any).x,
+                    (child as Phaser.Physics.Arcade.Sprite).x,
                     0,
                     true,
                     true,

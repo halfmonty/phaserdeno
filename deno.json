@@ -1,19 +1,21 @@
 {
   "tasks": {
-    "dev": { "dependencies": ["buildgame:watch", "runserver"] },
-    "runserver": "deno run --allow-all --watch main.ts",
-    "buildgame": "deno run --allow-all build.ts",
-    "buildgame:watch":"deno run --allow-all build.ts --watch"
+    "dev": {"dependencies": ["bundle", "serve"]},
+    "serve": "deno run --watch -A ./main.ts",
+    "bundle": "deno bundle --watch ./games/mod.ts --outdir ./static/js --platform 'browser'"
   },
   "imports": {
+    "@yandeu/tap": "npm:@yandeu/tap@^0.1.2",
     "@enable3d/phaser-extension": "npm:@enable3d/phaser-extension@^0.26.1",
-    "hono": "jsr:@hono/hono@^4.8.3",
-    "@std/assert": "jsr:@std/assert@1",
-    "phaser3-rex-plugins": "npm:phaser3-rex-plugins"
+    "matter-js": "npm:matter-js@^0.20.0",
+    "phaser": "npm:phaser@4.0.0-rc.4",
+    "poly-decomp": "npm:poly-decomp@^0.3.0",
+    "three": "npm:three@^0.178.0",
+    "three-csg-ts": "npm:three-csg-ts@^3.2.0"
   },
   "compilerOptions": {
     "lib": [
-      "deno.window", "deno.ns"
+      "deno.window", "deno.ns", "dom"
     ]
   },
   "fmt": {

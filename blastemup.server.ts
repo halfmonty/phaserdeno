@@ -1,57 +1,59 @@
-import { Hono } from 'hono';
-import { upgradeWebSocket } from 'hono/deno';
-
 const players: Record<string, any> = {};
 const clients = new Set<WebSocket>();
 
 const socketToPlayerKey = new Map<WebSocket, string>();
 const playerKeyToSocket = new Map<string, WebSocket>();
 
-export const blastemupWS = new Hono()
-	.get(
-		'/',
-		upgradeWebSocket((_c) => {
-			return {
-				onOpen: (_event, ws) => {
-					console.log('🤝 New client connected');
-					clients.add(ws.raw!);
-				},
-				onMessage: (event, ws) => {
-					try {
-						const data = JSON.parse(event.data.toString());
-						const { type, payload } = data;
+export function handleBlastemUPWebSocket(request: Request): Response {
+	if (request.headers.get('upgrade') !== 'websocket') {
+		return new Response(null, { status: 501 });
+	}
 
-						switch (type) {
-							case 'newPlayer':
-								handleNewPlayer(payload, ws.raw!);
-								break;
-							case 'playerDisconnected':
-								console.log('⚠️ player disconnected');
-								handlePlayerDisconnected(payload, ws.raw!);
-								break;
-							case 'playerIsMoving':
-								handlePlayerMoving(payload, ws.raw!);
-								break;
-							default:
-								console.log('unknown meessage type:', type);
-						}
-					} catch (error) {
-						console.error('Error parsing message:', error);
-					}
-				},
-				onClose: (_event, ws) => {
-					console.log('👋 client disconnected');
-					clients.delete(ws.raw!);
-					handleDisconnection(ws.raw!);
-				},
-				onError: (event, ws) => {
-					console.log('🤷‍♂️ WebSocket error:', event);
-					clients.delete(ws.raw!);
-					handleDisconnection(ws.raw!);
-				},
-			};
-		}),
-	);
+	const { socket, response } = Deno.upgradeWebSocket(request);
+
+	socket.onopen = () => {
+		console.log('🤝 New client connected');
+		clients.add(socket);
+	};
+
+	socket.onmessage = (event) => {
+		try {
+			const data = JSON.parse(event.data.toString());
+			const { type, payload } = data;
+
+			switch (type) {
+				case 'newPlayer':
+					handleNewPlayer(payload, socket);
+					break;
+				case 'playerDisconnected':
+					console.log('⚠️ player disconnected');
+					handlePlayerDisconnected(payload, socket);
+					break;
+				case 'playerIsMoving':
+					handlePlayerMoving(payload, socket);
+					break;
+				default:
+					console.log('unknown meessage type:', type);
+			}
+		} catch (error) {
+			console.error('Error parsing message:', error);
+		}
+	};
+
+	socket.onclose = () => {
+		console.log('👋 client disconnected');
+		clients.delete(socket);
+		handleDisconnection(socket);
+	};
+
+	socket.onerror = (error) => {
+		console.log('🤷‍♂️ WebSocket error:', error);
+		clients.delete(socket);
+		handleDisconnection(socket);
+	};
+
+	return response;
+}
 
 function sendToClient(ws: WebSocket, type: string, payload: any) {
 	if (ws.readyState === WebSocket.OPEN) {
@@ -106,7 +108,7 @@ function handlePlayerDisconnected(key: string, ws: WebSocket) {
 }
 
 function handlePlayerMoving(positionData: any, ws: WebSocket) {
-	console.log('Server> playerMoved> Player moved to ', positionData);
+	// console.log('Server> playerMoved> Player moved to ', positionData);
 	const key = positionData?.key;
 
 	if (players[key] == undefined) return;

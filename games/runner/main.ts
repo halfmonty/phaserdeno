@@ -1,4 +1,4 @@
-import Phaser from 'https://esm.sh/phaser@4.0.0-rc.4';
+import Phaser from 'phaser';
 import Game from './scenes/game.ts';
 import GameOver from './scenes/gameover.ts';
 /*
@@ -23,4 +23,4 @@ const config: Phaser.Types.Core.GameConfig = {
 	scene: [Game, GameOver],
 };
 
-export const game = new Phaser.Game(config);
+export const Runner = () => new Phaser.Game(config);

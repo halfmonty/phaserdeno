@@ -1,4 +1,4 @@
-import Phaser from 'https://esm.sh/phaser@4.0.0-rc.4';
+import Phaser from 'phaser';
 // import PhaserMatterCollisionPlugin from 'https://esm.sh/phaser-matter-collision-plugin';
 import Bootloader from './scenes/bootloader.ts';
 import Outro from './scenes/outro.ts';
@@ -14,17 +14,6 @@ import Game from './scenes/game.ts';
 //   // Where to store in the Scene, e.g. scene.matterCollision:
 //   mapping: "matterCollision" as "matterCollision",
 // };
-
-// declare module 'https://esm.sh/phaser@4.0.0-rc.4' {
-//   interface Scene {
-//     [pluginConfig.mapping]: PhaserMatterCollisionPlugin;
-//   }
-//   namespace Scenes {
-//     interface Systems {
-//       [pluginConfig.key]: PhaserMatterCollisionPlugin;
-//     }
-//   }
-// }
 
 const config: Phaser.Types.Core.GameConfig = {
 	width: 600,
@@ -47,4 +36,4 @@ const config: Phaser.Types.Core.GameConfig = {
 	scene: [Bootloader, Splash, Transition, Game, Outro],
 };
 
-const game = new Phaser.Game(config);
+export const Dungeon = new Phaser.Game(config);

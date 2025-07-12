@@ -1,4 +1,4 @@
-import Phaser from 'https://esm.sh/phaser@4.0.0-rc.4';
+import Phaser from 'phaser';
 import Bootloader from "./scenes/boodloader.ts";
 import Game from "./scenes/game.ts";
 import Splash from "./scenes/splash.ts";
@@ -26,4 +26,4 @@ const config: Phaser.Types.Core.GameConfig = {
   scene: [ Bootloader, Splash, Transition, Game, Outro ],
 };
 
-export const game = new Phaser.Game(config);
+export const Wallhammer = () => new Phaser.Game(config);

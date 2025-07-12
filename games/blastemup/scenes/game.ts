@@ -42,7 +42,7 @@ export default class Game extends Phaser.Scene {
 This is where the connection with the server is established and we set listeners for events that we will receive from that server. Through those listeners, we will be aware of new players, player movement and player destroy events. We need to add that `.bind(this)` to this event callback to make the elements of this class reachable. In this case, we separate the group of enemies in a hash and their physical group with `this.enemyPlayers` to set the collisions. But we could just use the physical group.
 	*/
 	startSockets() {
-		this.socket = new WebSocket('ws://localhost:3000/ws/blastemup/');
+		this.socket = new WebSocket('ws://localhost:8000/ws/blastemup');
 
 		this.socket.onopen = () => {
 			console.log('Connected to WebSocket server');

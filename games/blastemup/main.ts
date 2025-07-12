@@ -1,9 +1,8 @@
-import Phaser from 'https://esm.sh/phaser@4.0.0-rc.4';
+import Phaser from 'phaser';
 import Bootloader from './scenes/bootloader.ts';
 import Game from './scenes/game.ts';
 
 const config: Phaser.Types.Core.GameConfig = {
-	useTicker: true,
 	width: 868,
 	height: 800,
 	scale: {
@@ -21,6 +20,7 @@ const config: Phaser.Types.Core.GameConfig = {
 	},
 	plugins: {},
 	scene: [Bootloader, Game],
+	...{useTicker: true}
 };
 
-const game = new Phaser.Game(config);
+export const Blastemup = () => new Phaser.Game(config);

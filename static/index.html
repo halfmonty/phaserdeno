@@ -3,19 +3,10 @@
 
 <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/png" href="/favicon.png" />
+    <link rel="icon" type="image/png" href="/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="/style.css">
     <title>Phaser - Game</title>
-
-    <!-- <style>
-        /* reset CSS */
-        html,
-        body {
-            margin: 0
-            padding: 0;
-        }
-    </style> -->
 </head>
 
 <body>
@@ -67,56 +58,9 @@
         // Connect to live reload WebSocket
         connectReloadWs();
     </script>
+    
     <!-- Load the game -->
-    <script type="module" src="js/basicgame/main.js"></script>
+    <script type="module" src="/js/mod.js"></script>
 </body>
-
-<style>
-    body {
-        margin: 0;
-        padding: 0;
-        background: #2c3e50;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        min-height: 100vh;
-        font-family: Arial, sans-serif;
-    }
-
-    #game-container {
-        border: 2px solid #34495e;
-        border-radius: 8px;
-        overflow: hidden;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-    }
-
-    .dev-info {
-        position: fixed;
-        top: 10px;
-        right: 10px;
-        background: rgba(0, 0, 0, 0.7);
-        color: white;
-        padding: 8px 12px;
-        border-radius: 4px;
-        font-size: 12px;
-        z-index: 1000;
-    }
-
-    .reload-status {
-        display: inline-block;
-        width: 8px;
-        height: 8px;
-        border-radius: 50%;
-        margin-right: 8px;
-    }
-
-    .reload-status.connected {
-        background: #2ecc71;
-    }
-
-    .reload-status.disconnected {
-        background: #e74c3c;
-    }
-</style>
 
 </html>
