@@ -1,4 +1,5 @@
 export default class Zombie extends Phaser.Physics.Arcade.Sprite {
+    declare body: Phaser.Physics.Arcade.Body
     direction: number;
     dead: boolean = false;
 
@@ -9,7 +10,7 @@ export default class Zombie extends Phaser.Physics.Arcade.Sprite {
         this.scene.physics.add.existing(this);
         this.scene.physics.world.enable(this);
         this.scene.add.existing(this);
-        // this.body?.setAllowGravity(true);
+        this.body.setAllowGravity(true);
         this.direction = type === "right" ? -1 : 1;
 
         this.init();

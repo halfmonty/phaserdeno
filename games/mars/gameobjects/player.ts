@@ -61,7 +61,7 @@ export default class Player extends Phaser.GameObjects.Sprite {
   */
     
 
-	override update(_time: any, delta: any) {
+	override update(_time: number, delta: number) {
 		if (this.dead) return;
 		if (this.locked) return;
 		this.stepDelta += delta;

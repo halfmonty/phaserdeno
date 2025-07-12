@@ -1,6 +1,7 @@
 import Bubble from './bubble.ts';
 
 export default class Bat extends Phaser.Physics.Matter.Sprite {
+	declare body: Phaser.Physics.Arcade.Body;
     label: string;
     startX: number;
     direction: number;
@@ -65,7 +66,7 @@ export default class Bat extends Phaser.Physics.Matter.Sprite {
 		// });
 	}
 
-	onBatCollide({ gameObjectA, gameObjectB }: {gameObjectA: any, gameObjectB: any}) {
+	onBatCollide({ _gameObjectA, gameObjectB }: { _gameObjectA: Bat, gameObjectB: Phaser.GameObjects.GameObject}) {
 		if (gameObjectB instanceof Bubble) {
 			gameObjectB.load('bat');
 			this.destroy();
@@ -77,7 +78,7 @@ export default class Bat extends Phaser.Physics.Matter.Sprite {
   */
 	override update() {
 		if (!this.active) return;
-		if (Math.abs((this.body as Phaser.Physics.Arcade.Body).velocity.x) <= 0.5) this.turn();
+		if (Math.abs(this.body.velocity.x) <= 0.5) this.turn();
 	}
 
 	/*

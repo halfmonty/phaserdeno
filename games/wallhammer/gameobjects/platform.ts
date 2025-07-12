@@ -1,19 +1,20 @@
 export default class Platform extends Phaser.GameObjects.Container {
+    declare body: Phaser.Physics.Arcade.Body;
     chain: Phaser.GameObjects.Sprite;
     platform: Phaser.GameObjects.Sprite;
 
-    constructor(scene: Phaser.Scene, x: number, y: number, size = 4, demo = false) {
+    constructor(scene: Phaser.Scene, x: number, y: number, size = 4, _demo = false) {
         super(scene, x, y);
         this.x = x;
         this.y = y;
         this.scene.add.existing(this);
         this.scene.physics.add.existing(this);
-        (this.body as Phaser.Physics.Arcade.Body).setAllowGravity(false);
-        (this.body as Phaser.Physics.Arcade.Body).setBounce(1);
-        (this.body as Phaser.Physics.Arcade.Body).setSize(size * 64, 64);
-        (this.body as Phaser.Physics.Arcade.Body).setOffset(-2, -2);
-        (this.body as Phaser.Physics.Arcade.Body).immovable = true;
-        (this.body as Phaser.Physics.Arcade.Body).moves = false;
+        this.body.setAllowGravity(false);
+        this.body.setBounce(1);
+        this.body.setSize(size * 64, 64);
+        this.body.setOffset(-2, -2);
+        this.body.immovable = true;
+        this.body.moves = false;
         this.chain = new Phaser.GameObjects.Sprite(
             this.scene,
             size * 32 - 32,

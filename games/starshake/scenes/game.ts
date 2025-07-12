@@ -27,18 +27,18 @@ export default class Game extends Phaser.Scene {
   player: Player | null;
   score: number;
   scoreText: null;
-  name: any;
-  number: any;
-  next: any;
+  name!: string;
+  number!: number;
+  next!: string;
   currentPowerUp!: number;
   width!: number;
   height!: number;
   center_width!: number;
   center_height!: number;
   background!: Phaser.GameObjects.TileSprite;
-  lastDestroyedWaveFoe!: { x: any; y: any };
+  lastDestroyedWaveFoe!: { x: number; y: number };
   shake!: PowerUp;
-  powerUps: any;
+  powerUps!: Phaser.GameObjects.Group;
   scores!: Record<PlayerName, Score>;
   trailLayer!: Phaser.GameObjects.Layer;
   players!: Phaser.GameObjects.Group;
@@ -465,7 +465,7 @@ export default class Game extends Phaser.Scene {
   /*
     The power-up looks the same but the effect is different. We keep increasing its value so we can apply the effect to the player. In this game, the power-up applies another shooting pattern.
     */
-  updatePowerUp(player: Player, powerUp: PowerUp) {
+  updatePowerUp(player: Player, _powerUp: PowerUp) {
     player.powerUp = this.available[this.currentPowerUp];
     this.currentPowerUp =
       this.currentPowerUp + 1 === this.available.length

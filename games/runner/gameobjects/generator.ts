@@ -106,7 +106,6 @@ export class Obstacle extends Phaser.GameObjects.Rectangle {
     scene.add.existing(this);
     scene.physics.add.existing(this);
     this.body.setAllowGravity(false);
-    const alpha = 1 / Phaser.Math.Between(1, 3);
 
     this.init();
   }
@@ -135,7 +134,6 @@ export class Coin extends Phaser.GameObjects.Sprite {
     scene.add.existing(this);
     scene.physics.add.existing(this);
     this.body.setAllowGravity(false);
-    const alpha = 1 / Phaser.Math.Between(1, 3);
 
     this.init();
   }
@@ -150,7 +148,7 @@ export class Coin extends Phaser.GameObjects.Sprite {
       },
     });
 
-    const coinAnimation = this.scene.anims.create({
+    this.scene.anims.create({
       key: "coin",
       frames: this.scene.anims.generateFrameNumbers("coin", {
         start: 0,

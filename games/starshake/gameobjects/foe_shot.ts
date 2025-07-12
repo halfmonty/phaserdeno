@@ -94,7 +94,7 @@ class FoeShot extends Phaser.GameObjects.PointLight {
     This function shows the points when the shot is destroyed. The points are shown in a bitmap text and they are tweened to make them move up and fade out.
     */
   showPoints(score: number, color = 0xff0000) {
-    let text = this.scene.add
+    const text = this.scene.add
       .bitmapText(this.x + 20, this.y - 30, "wendy", "+" + score, 40, color)
       .setOrigin(0.5);
     this.scene.tweens.add({

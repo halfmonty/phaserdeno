@@ -257,8 +257,8 @@ export default class FoeGenerator {
 
       this.scene.foeWaveGroup.children.forEach((foe) => {
         if (foe === null || !foe.active || !(foe instanceof Foe)) return;
-        let t = foe.z;
-        let vec = foe.getData("vector");
+        const t = foe.z;
+        const vec = foe.getData("vector");
         this.path.getPoint(t, vec);
         foe.setPosition(vec.x, vec.y);
         foe.shadow?.setPosition(vec.x + 20, vec.y + 20);

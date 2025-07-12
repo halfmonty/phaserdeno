@@ -1,7 +1,6 @@
 import Player from '../gameobjects/player.ts';
 import Object from '../gameobjects/object.ts';
 import Drone from '../gameobjects/drone.ts';
-import HorrifiPostFx from 'phaser3-rex-plugins/plugins/horrifipipeline.js';
 import Hole from '../gameobjects/hole.ts';
 
 export default class Game extends Phaser.Scene {
@@ -80,7 +79,6 @@ export default class Game extends Phaser.Scene {
 		// () => this.skipThis(), this); // for testing
 		this.cameras.main.startFollow(this.player!, true, 0.05, 0.05, 0, 0);
 		this.loadAudios();
-		this.addEffects();
 		this.playMusic();
 	}
 
@@ -92,13 +90,6 @@ The oxygen bar is the only UI element in the game. It's a rectangle that changes
 			.rectangle(this.center_width, 40, this.player!.oxygen * 1.8, 20, 0x6b140b)
 			.setOrigin(0.5)
 			.setScrollFactor(0);
-	}
-
-	/*
-This is the method that will add the post-processing effects to the game. The game uses the HorrifiPostFx plugin, which is a custom plugin that adds a horror effect to the game.
-  */
-	addEffects() {
-		// this.cameras.main.setPostPipeline(HorrifiPostFx);
 	}
 
 	/*
@@ -243,12 +234,12 @@ Here we add the player element to the game. We also add the collisions between t
 		);
 	}
 
-	hitFloor(player: Player, platform: any) {}
+	hitFloor(_player: Player, _platform: unknown) { ()=> {} }
 
 	/*
 This is the method that will be called when the player touches an object. It will call the touch method of the object.
   */
-	touchObject(player: Player, object: any) {
+	touchObject(_player: Player, object: Object) {
 		if (object.type === 'hole') this.playTracker();
 		if (!object.activated) {
 			object.activated = true;
@@ -259,7 +250,7 @@ This is the method that will be called when the player touches an object. It wil
 	/*
 If the player is hit by a foe (drone), it will die and the scene will restart.
   */
-	playerHitByFoe(player: Player, foe: any) {
+	playerHitByFoe(player: Player, _foe: Drone) {
 		this.cameras.main.shake(100);
 		this.playAudio('killed');
 		player.death();
@@ -418,7 +409,7 @@ If the player dies, the scene will restart. We show a failure message and a blac
 	/*
 If the player reaches the exit object, we finish the scene. We disable the player, play a sound, and show a black rectangle that will fade in.
   */
-	finishScene(mute = true) {
+	finishScene(_mute = true) {
 		const x = this.cameras.main.worldView.centerX;
 		const y = this.cameras.main.worldView.centerY;
 

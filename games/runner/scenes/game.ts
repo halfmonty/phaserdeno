@@ -33,7 +33,7 @@ export default class Game extends Phaser.Scene {
     | Phaser.Sound.NoAudioSound
     | Phaser.Sound.HTML5AudioSound
     | Phaser.Sound.WebAudioSound;
-  jumpTween: any;
+  jumpTween?: Phaser.Tweens.Tween;
   name!: string;
 
   constructor() {
@@ -145,7 +145,7 @@ between the player and the coins. The key part there is to set a function that w
     */
     this.input.on(
       "pointerdown",
-      (pointer: Phaser.Input.Pointer) => this.jump(),
+      (_pointer: Phaser.Input.Pointer) => this.jump(),
       this
     );
 
@@ -165,7 +165,7 @@ This method is called when the player hits an obstacle. We stop the updateScoreE
 
 And obviously, we finish the scene.
 */
-  hitObstacle(player: Player, obstacle: Obstacle) {
+  hitObstacle(_player: Player, _obstacle: Obstacle) {
     this.updateScoreEvent.destroy();
     this.finishScene();
   }
@@ -173,7 +173,7 @@ And obviously, we finish the scene.
   /*
 This method is called when the player hits a coin. We play a sound, update the score, and destroy the coin.
 */
-  hitCoin(player: Player, coin: Coin) {
+  hitCoin(_player: Player, coin: Coin) {
     this.playAudio("coin");
     this.updateScore(1000);
     coin.destroy();

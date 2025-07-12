@@ -40,14 +40,14 @@ export default class Splash extends Phaser.Scene {
 			this.time.delayedCall(
 				600 * (i + 1),
 				() => {
-					let text = this.add
+					this.add
 						.bitmapText(70 * i + 50, 200, 'pico', letter, 70)
 						.setTint(0x6b140b)
 						.setOrigin(0.5)
 						.setDropShadow(0, 4, 0x6b302a, 0.9);
 					Array(Phaser.Math.Between(2, 4))
 						.fill(0)
-						.forEach((j) => {
+						.forEach((_j) => {
 							this.smokeLayer.add(
 								new ShotSmoke(
 									this,

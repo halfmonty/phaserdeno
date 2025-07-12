@@ -11,7 +11,6 @@ export default class Splash extends Phaser.Scene {
 	gameLogo1!: Phaser.GameObjects.BitmapText;
 	gameLogo2!: Phaser.GameObjects.BitmapText;
 	startButton!: Phaser.GameObjects.BitmapText;
-	space: any;
 
 	constructor() {
 		super({ key: 'splash' });
@@ -138,13 +137,6 @@ export default class Splash extends Phaser.Scene {
 		this.startButton.on('pointerout', () => {
 			this.startButton.setTint(0xffe066);
 		});
-		this.tweens.add({
-			targets: this.space,
-			duration: 300,
-			alpha: { from: 0, to: 1 },
-			repeat: -1,
-			yoyo: true,
-		});
 	}
 
 	showInstructions() {
@@ -155,12 +147,5 @@ export default class Splash extends Phaser.Scene {
 		this.add
 			.bitmapText(this.center_width + 40, 400, 'mario', 'By PELLO', 15)
 			.setOrigin(0.5);
-		this.tweens.add({
-			targets: this.space,
-			duration: 300,
-			alpha: { from: 0, to: 1 },
-			repeat: -1,
-			yoyo: true,
-		});
 	}
 }

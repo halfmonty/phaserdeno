@@ -242,7 +242,7 @@ export default class Game extends Phaser.Scene {
         this.player = new Player(this, playerPosition.x, playerPosition.y, 0);
 
         this.physics.add.collider(
-            this.player as any, // TODO: fix type here
+            this.player as Phaser.Types.Physics.Arcade.ArcadeColliderType,
             this.platform,
             this.hitFloor as Phaser.Types.Physics.Arcade.ArcadePhysicsCallback,
             () => {
@@ -252,7 +252,7 @@ export default class Game extends Phaser.Scene {
         );
 
         this.physics.add.collider(
-            this.player as any,
+            this.player as Phaser.Types.Physics.Arcade.ArcadeColliderType,
             this.platformGroup,
             this.hitFloor as Phaser.Types.Physics.Arcade.ArcadePhysicsCallback,
             () => {
@@ -262,7 +262,7 @@ export default class Game extends Phaser.Scene {
         );
 
         this.physics.add.collider(
-            this.player as any,
+            this.player as Phaser.Types.Physics.Arcade.ArcadeColliderType,
             this.bricks,
             this.hitFloor as Phaser.Types.Physics.Arcade.ArcadePhysicsCallback,
             () => {
@@ -272,7 +272,7 @@ export default class Game extends Phaser.Scene {
         );
 
         this.physics.add.overlap(
-            this.player as any,
+            this.player as Phaser.Types.Physics.Arcade.ArcadeColliderType,
             this.coins,
             this.pickCoin as Phaser.Types.Physics.Arcade.ArcadePhysicsCallback,
             () => {
@@ -282,7 +282,7 @@ export default class Game extends Phaser.Scene {
         );
 
         this.physics.add.overlap(
-            this.player as any,
+            this.player as Phaser.Types.Physics.Arcade.ArcadeColliderType,
             this.lunchBoxGroup,
             this.pickLunchBox as Phaser.Types.Physics.Arcade.ArcadePhysicsCallback,
             () => {
@@ -292,7 +292,7 @@ export default class Game extends Phaser.Scene {
         );
 
         this.physics.add.overlap(
-            this.player as any,
+            this.player as Phaser.Types.Physics.Arcade.ArcadeColliderType,
             this.exitGroup,
             () => {
                 this.playAudio("stage");
@@ -347,7 +347,7 @@ export default class Game extends Phaser.Scene {
         );
 
         this.physics.add.collider(
-            this.player as any,
+            this.player as Phaser.Types.Physics.Arcade.ArcadeColliderType,
             this.batGroup,
             this.hitPlayer as Phaser.Types.Physics.Arcade.ArcadePhysicsCallback,
             () => {
@@ -357,7 +357,7 @@ export default class Game extends Phaser.Scene {
         );
 
         this.physics.add.collider(
-            this.player as any,
+            this.player as Phaser.Types.Physics.Arcade.ArcadeColliderType,
             this.zombieGroup,
             this.hitPlayer as Phaser.Types.Physics.Arcade.ArcadePhysicsCallback,
             () => {

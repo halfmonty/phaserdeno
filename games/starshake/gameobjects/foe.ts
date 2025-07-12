@@ -125,7 +125,7 @@ class Foe extends Phaser.GameObjects.Sprite {
     } else if (Phaser.Math.Between(1, 101) > 100) {
       if (!this.scene || !this.scene.player) return;
       this.scene.playAudio("foeshot");
-      let shot = new FoeShot(this.scene, this.x, this.y, "foe", this.name);
+      const shot = new FoeShot(this.scene, this.x, this.y, "foe", this.name);
       this.scene.foeShots.add(shot);
       this.scene.physics.moveTo(
         shot,
@@ -215,7 +215,7 @@ class Foe extends Phaser.GameObjects.Sprite {
     As we do when destroying shots, this function shows the points when a foe is destroyed with a simple tween effect.
     */
   showPoints(score: number, color = 0xff0000) {
-    let text = this.scene.add
+    const text = this.scene.add
       .bitmapText(this.x + 20, this.y - 30, "wendy", "+" + score, 40, color)
       .setOrigin(0.5);
     this.scene.tweens.add({

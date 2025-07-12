@@ -1,18 +1,18 @@
-import EasyStar from 'https://esm.sh/easystarjs@0.4.4/es2022/easystarjs.mjs';
+import EasyStar from 'easystarjs';
 import Game from '../scenes/game.ts';
 
 export default class Drone extends Phaser.GameObjects.Sprite {
 	declare scene: Game;
 	declare body: Phaser.Physics.Arcade.Body;
-	easystar: any;
-	path: any;
-	grid: any;
+	easystar: EasyStar.js;
+	path?: { x: number; y: number; }[];
+	grid: number[][];
 	direction!: number;
 	delayedMove?: Phaser.Time.TimerEvent;
 	moveTimeline?: Phaser.Time.Timeline;
 	i?: number;
 
-	constructor(scene: Phaser.Scene, x: number, y: number, grid: any) {
+	constructor(scene: Phaser.Scene, x: number, y: number, grid: number[][]) {
 		super(scene, x, y, 'drone');
 		this.name = 'drone';
 		this.setScale(1);
@@ -103,7 +103,7 @@ export default class Drone extends Phaser.GameObjects.Sprite {
 	/*
   And finally, this function will move the drone to the calculated path. At the end of the path, it will call the launchMove function again, so the drone can recalculate the path even if the player changes her position.
   */
-	moveIt(path: any) {
+	moveIt(path: { x: number; y: number; }[]) {
 		if (path === null) {
 			console.log('hello sneaky pete');
 		} else {

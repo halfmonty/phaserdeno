@@ -3,6 +3,7 @@ import Block from './block.ts';
 
 export default class BlockGroup extends Phaser.GameObjects.Container {
 	declare scene: Game;
+	declare body: Phaser.Physics.Arcade.Body;
 	override w: number;
 	h: number;
 	id: number;
@@ -30,7 +31,7 @@ export default class BlockGroup extends Phaser.GameObjects.Container {
 		this.name = 'block_' + color;
 		this.scene.add.existing(this);
 		this.scene.physics.add.existing(this);
-		(this.body as Phaser.Physics.Arcade.Body).immovable = true;
+		this.body.immovable = true;
 		this.active = false;
 		153;
 		this.setKeys();
@@ -42,7 +43,7 @@ export default class BlockGroup extends Phaser.GameObjects.Container {
 	}
 
 	createBlock() {
-		(this.body as Phaser.Physics.Arcade.Body).setSize(this.w * 32, this.h * 32);
+		this.body.setSize(this.w * 32, this.h * 32);
 
 		for (let i = 0; i < this.w; i++) {
 			for (let j = 0; j < this.h; j++) {

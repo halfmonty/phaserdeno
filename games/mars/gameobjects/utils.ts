@@ -13,13 +13,11 @@ This is the typeText method. It will create a bitmap text for each character in 
 		const characters: Array<Phaser.GameObjects.BitmapText | Phaser.GameObjects.Rectangle> = [];
 		let jump = 0;
 		let line = 0;
-		let last = 0;
-		text.split('').forEach((character, i) => {
+		text.split('').forEach((character, _i) => {
 			if (character === '\n') {
 				jump += 2;
 				line = 0;
 			}
-			last = i;
 			characters.push(
 				this.scene.add
 					.bitmapText(
@@ -40,7 +38,7 @@ This is the typeText method. It will create a bitmap text for each character in 
 		const timeline = this.scene.add.timeline({});
 		this.typeAudio = this.scene.sound.add('type');
 
-		characters.forEach((character, i) => {
+		characters.forEach((character, _i) => {
 			timeline.add({
 				at: 0,
 				tween: {
@@ -82,7 +80,7 @@ This is the typeText method. It will create a bitmap text for each character in 
 	/*
 This removes the typed text from the screen.
   */
-	removeTyped(texts: any) {
-		texts.flat().forEach((char:any) => char.destroy());
+	removeTyped(texts: (Phaser.GameObjects.BitmapText | Phaser.GameObjects.Rectangle)[][]) {
+		texts.flat().forEach((char) => char.destroy());
 	}
 }

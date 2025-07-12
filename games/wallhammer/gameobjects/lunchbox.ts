@@ -1,20 +1,22 @@
+import Game from '../scenes/game.ts';
+
 export default class LunchBox extends Phaser.GameObjects.Sprite {;
+    declare scene: Game
+    declare body: Phaser.Physics.Arcade.Body;
     disabled: boolean;
     prizeSprite: Phaser.GameObjects.Sprite | undefined;
 
     constructor(scene: Phaser.Scene, x: number, y: number, name:string = "lunchbox") {
         super(scene, x, y, name);
-        this.scene = scene;
+        this.scene = scene as Game;
         this.name = name;
         this.setScale(1);
         this.setOrigin(0.5);
-
-        this.body = this.body as Phaser.Physics.Arcade.Body;
         scene.add.existing(this);
         scene.physics.add.existing(this);
 
-        (this.body as Phaser.Physics.Arcade.Body).immovable = true;
-        (this.body as Phaser.Physics.Arcade.Body).moves = false;
+        this.body.immovable = true;
+        this.body.moves = false;
         this.disabled = false;
         this.init();
     }
@@ -66,7 +68,7 @@ export default class LunchBox extends Phaser.GameObjects.Sprite {;
     showPrize() {
         const prize = ["boots", "hammer", "coin", "star", "speed"];
         const selectedPrize = Phaser.Math.RND.pick(prize);
-        (this.scene as unknown as any).player.applyPrize(selectedPrize); // TODO: fix types here
+        this.scene.player?.applyPrize(selectedPrize);
         this.prizeSprite = this.scene.add
             .sprite(this.x, this.y, selectedPrize)
             .setOrigin(0.5)
@@ -76,8 +78,7 @@ export default class LunchBox extends Phaser.GameObjects.Sprite {;
             duration: 500,
             y: { from: this.y, to: this.y - 64},
             onComplete: () => {
-                // @ts-ignore
-                this.scene.playAudio("prize"); // TODO: fix types here
+                this.scene.playAudio("prize");
             }
         })
     }

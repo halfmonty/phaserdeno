@@ -46,34 +46,10 @@ export default class GameOver extends Phaser.Scene {
     this.input.keyboard?.on("keydown-SPACE", this.startGame, this);
     this.input.on(
       "pointerdown",
-      (pointer: Phaser.Input.Pointer) => this.startGame(),
+      (_pointer: Phaser.Input.Pointer) => this.startGame(),
       this
     );
   }
-
-  /**
-   * Typescript Addition:
-   * To the best of my knowledge, this method is not used anywhere in the codebase.
-   *
-   * It is attempting to add to an `introLayer` property which is not defined anywhere.
-   *
-   * So to make Typescript happy (since it doesn't know what `introLayer` is) I just commented it out.
-   *
-   * However, if I had to make an educated guess I assume it was meant to be a Phaser.GameObjects.Layer
-   */
-  // showLine(text: string, y:number) {
-  //   let line = this.introLayer.add(
-  //     this.add
-  //       .bitmapText(this.center_width, y, "pixelFont", text, 25)
-  //       .setOrigin(0.5)
-  //       .setAlpha(0)
-  //   );
-  //   this.tweens.add({
-  //     targets: line,
-  //     duration: 2000,
-  //     alpha: 1,
-  //   });
-  // }
 
   startGame() {
     this.scene.start("game");

@@ -149,7 +149,7 @@ export default class Game extends Phaser.Scene {
 	addPlayer(block: BlockGroup) {
 		this.player = block;
 		this.physics.add.overlap(
-			this.player as any,
+			this.player as Phaser.Types.Physics.Arcade.ArcadeColliderType,
 			this.exits,
 			this.hitExit as Phaser.Types.Physics.Arcade.ArcadePhysicsCallback,
 			() => {

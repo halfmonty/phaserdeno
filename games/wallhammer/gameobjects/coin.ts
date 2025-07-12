@@ -1,8 +1,9 @@
 import Game from "../scenes/game.ts";
 
 export default class Coin extends Phaser.GameObjects.Sprite {
-    disabled: boolean;
     declare scene: Game;
+    declare body: Phaser.Physics.Arcade.Body;
+    disabled: boolean;
 
     constructor(scene: Phaser.Scene, x: number, y: number, name = "coin") {
         super(scene, x, y, name);
@@ -13,8 +14,8 @@ export default class Coin extends Phaser.GameObjects.Sprite {
         this.scene.add.existing(this);
         this.scene.physics.add.existing(this);
 
-        (this.body as Phaser.Physics.Arcade.Body).immovable = true;
-        (this.body as Phaser.Physics.Arcade.Body).moves = false;
+        this.body.immovable = true;
+        this.body.moves = false;
         this.disabled = false;
         this.init();
     }

@@ -1,3 +1,4 @@
+import Game from '../scenes/game.ts';
 import Blow from "./blow.ts";
 import Brick from "./brick.ts";
 import { JumpSmoke } from "./particle.ts";
@@ -13,6 +14,8 @@ enum playerAnimation {
 }
 
 export default class Player extends Phaser.GameObjects.Sprite {
+    declare scene: Game;
+    declare body: Phaser.Physics.Arcade.Body;
     spaceBar: Phaser.Input.Keyboard.Key;
     down: Phaser.Input.Keyboard.Key;
     right: boolean;
@@ -42,8 +45,8 @@ export default class Player extends Phaser.GameObjects.Sprite {
         this.spaceBar = this.scene.input.keyboard?.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE)!;
         this.down = this.scene.input.keyboard?.addKey(Phaser.Input.Keyboard.KeyCodes.DOWN)!;
         this.right = true;
-        (this.body as Phaser.Physics.Arcade.Body).setGravityY(100);
-        (this.body as Phaser.Physics.Arcade.Body).setSize(48, 60);
+        this.body.setGravityY(100);
+        this.body.setSize(48, 60);
         this.init();
         this.jumping = false;
         this.building = false;
@@ -85,8 +88,8 @@ export default class Player extends Phaser.GameObjects.Sprite {
     override update() {
         if (this.dead) return;
         if (this.jumping) {
-            if ((this.body as Phaser.Physics.Arcade.Body).velocity.y >= 0) {
-                (this.body as Phaser.Physics.Arcade.Body).setGravityY(700);
+            if (this.body.velocity.y >= 0) {
+                this.body.setGravityY(700);
                 this.falling = true;
             }
         }
@@ -94,36 +97,34 @@ export default class Player extends Phaser.GameObjects.Sprite {
         if (
             (Phaser.Input.Keyboard.JustDown(this.cursor.up) || 
             Phaser.Input.Keyboard.JustDown(this.W)) &&
-            (this.body as Phaser.Physics.Arcade.Body).blocked.down
+            this.body.blocked.down
         ) {
             this.building = false;
-            (this.body as Phaser.Physics.Arcade.Body).setVelocity(this.jumpVelocity);
-            (this.body as Phaser.Physics.Arcade.Body).setGravityY(400);
+            this.body.setVelocity(this.jumpVelocity);
+            this.body.setGravityY(400);
             this.anims.play(playerAnimation.jump, true);
-            //@ts-ignore
-            this.scene.playAudio("jump"); // TODO: fix types
+            this.scene.playAudio("jump");
             this.jumping = true;
             this.jumpSmoke();
         } else if (this.cursor.right.isDown || this.D.isDown) {
             this.building = false;
-            if ((this.body as Phaser.Physics.Arcade.Body).blocked.down) {
+            if (this.body.blocked.down) {
                 this.anims.play(playerAnimation.walk, true);
             }
             this.right = true;
-            this.flipX = (this.body as Phaser.Physics.Arcade.Body).velocity.x < 0;
-            (this.body as Phaser.Physics.Arcade.Body).setVelocityX(this.walkVelocity);
+            this.flipX = this.body.velocity.x < 0;
+            this.body.setVelocityX(this.walkVelocity);
         } else if ( this.cursor.left.isDown || this.A.isDown) {
             this.building = false;
-            if((this.body as Phaser.Physics.Arcade.Body).blocked.down) {
+            if(this.body.blocked.down) {
                 this.anims.play(playerAnimation.walk, true);
             }
             this.right = false;
             this.flipX = true;
-            (this.body as Phaser.Physics.Arcade.Body).setVelocityX(-this.walkVelocity);
+            this.body.setVelocityX(-this.walkVelocity);
         } else {
-            if((this.body as Phaser.Physics.Arcade.Body).blocked.down) {
+            if(this.body.blocked.down) {
                 if (this.jumping) {
-                    // @ts-ignore TODO: fix
                     this.scene.playAudio("land");
                     this.landSmoke();
                 }
@@ -133,7 +134,7 @@ export default class Player extends Phaser.GameObjects.Sprite {
                 if(!this.building) this.anims.play(playerAnimation.idle, true);
             }
 
-            (this.body as Phaser.Physics.Arcade.Body).setVelocityX(0);
+            this.body.setVelocityX(0);
         }
 
         if (Phaser.Input.Keyboard.JustDown(this.spaceBar)) this.hammerBlow();
@@ -161,12 +162,10 @@ export default class Player extends Phaser.GameObjects.Sprite {
     buildBlock() {
         this.building = true;
         this.anims.play(playerAnimation.build, true);
-        // @ts-ignore TODO: fix
         this.scene.playAudio("build")
         const offsetX = this.right ? 64 : -64;
         const offsetY = this.jumpVelocity === -400 ? 0 : -128;
         this.buildSmoke(32, offsetX);
-        // @ts-ignore TODO: fix types
         this.scene.bricks.add(
             new Brick(this.scene, this.x + offsetX, this.y + offsetY)
         );
@@ -175,7 +174,7 @@ export default class Player extends Phaser.GameObjects.Sprite {
     buildSmoke(offsetY = 10, offsetX: number) {
         Array(Phaser.Math.Between(8, 14))
             .fill(0)
-            .forEach((i) => {
+            .forEach((_i) => {
                 const varX = Phaser.Math.Between(-20, 20);
                 new JumpSmoke(this.scene, this.x + (offsetX + varX), this.y + offsetY);
             });
@@ -186,7 +185,6 @@ export default class Player extends Phaser.GameObjects.Sprite {
         this.anims.play(playerAnimation.hammer, true);
         const offsetX = this.right ? 32 : -32;
         const size = this.mjolnir ? 128 : 32;
-        // @ts-ignore TODO: fix types
         this.scene.blows.add(
             new Blow(this.scene, this.x + offsetX, this.y, size, size)
         );
@@ -196,7 +194,7 @@ export default class Player extends Phaser.GameObjects.Sprite {
         this.right = !this.right;
     }
 
-    animationComplete(animation: Phaser.Animations.Animation, frame: Phaser.Animations.AnimationFrame) {
+    animationComplete(animation: Phaser.Animations.Animation, _frame: Phaser.Animations.AnimationFrame) {
         if (animation.key === "playerground") {
             this.anims.play("playeridle", true);
         }
@@ -210,17 +208,16 @@ export default class Player extends Phaser.GameObjects.Sprite {
     hit() {
         this.health--;
         this.anims.play(playerAnimation.dead, true);
-        (this.body as Phaser.Physics.Arcade.Body).enable = false;
+        this.body.enable = false;
         if (this.health === 0 ) this.die();
     }
 
     die() {
         this.dead = true;
         this.anims.play(playerAnimation.dead, true);
-        (this.body as Phaser.Physics.Arcade.Body).immovable = true;
-        (this.body as Phaser.Physics.Arcade.Body).moves = false;
-        // @ts-ignore
-        this.scene.restartScene(); // TODO: type fix
+        this.body.immovable = true;
+        this.body.moves = false;
+        this.scene.restartScene();
     }
 
     applyPrize(prize: string) {
@@ -238,7 +235,6 @@ export default class Player extends Phaser.GameObjects.Sprite {
                 this.flashPlayer();
                 break;
             case "coin":
-                // @ts-ignore TODO: fix types
                 this.scene.updateCoins();
                 break;
             case "star":

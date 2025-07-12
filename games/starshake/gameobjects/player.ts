@@ -17,7 +17,7 @@ class Player extends Phaser.GameObjects.Sprite {
   A!: Phaser.Input.Keyboard.Key;
   S!: Phaser.Input.Keyboard.Key;
   D!: Phaser.Input.Keyboard.Key;
-  death: any;
+  death: boolean = false;
 
   declare body: Phaser.Physics.Arcade.Body;
   declare scene: Game;
@@ -162,8 +162,8 @@ class Player extends Phaser.GameObjects.Sprite {
   /*
     Every time the player destroys a foe or a shot we show the points. We'll use a bitmap text for that.
     */
-  showPoints(score: number, color = 0xff0000) {
-    let text = this.scene.add
+  showPoints(score: number, _color = 0xff0000) {
+    const text = this.scene.add
       .bitmapText(
         this.x + 20,
         this.y - 30,

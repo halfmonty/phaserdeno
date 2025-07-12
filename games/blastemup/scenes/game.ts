@@ -1,11 +1,12 @@
 import Player from '../gameobjects/player.ts';
 import {
-	CURRENT_PLAYERS,
 	NEW_PLAYER,
 	PLAYER_DISCONNECTED,
 	PLAYER_IS_MOVING,
-	PLAYER_MOVED,
 } from '../status.ts';
+
+type PlayerPositionData = { x: number; y: number; rotation: number; key: string; };
+type MessageData = Player | PlayerPositionData | string | Player & PlayerPositionData;
 
 export default class Game extends Phaser.Scene {
 	id: number | null = null;
@@ -67,26 +68,27 @@ This is where the connection with the server is established and we set listeners
 		this.enemyPlayers = this.physics.add.group();
 	}
 
-	handleMessage(type: string, payload: any) {
+	handleMessage(type: string, payload: MessageData) {
 		switch (type) {
 			case 'newPlayer':
-				this.addEnemyPlayers(payload);
+				this.addEnemyPlayers(payload as Player);
 				break;
 
-			case 'currentPlayers':
-				Object.keys(payload as object).forEach((key) => {
-					if (!this.enemies[key] && key !== this.player.key) {
-						this.addEnemyPlayers(payload[key]);
-					}
-				});
-				break;
+			// case 'currentPlayers':
+			// 	Object.keys(payload as object).forEach((key) => {
+			// 		if (!this.enemies[key] && key !== this.player.key) {
+			// 			this.addEnemyPlayers(payload[key]);
+			// 		}
+			// 	});
+			// 	break;
 
 			case 'playerMoved':
 				{
-					const [_name, key] = payload.name.split(':');
+					const positionPayload = payload as Player & PlayerPositionData ;
+					const [_name, key] = positionPayload.name.split(':');
 					if (this.enemies[key]) {
-						this.enemies[key].setRotation(payload.rotation);
-						this.enemies[key].setPosition(payload.x, payload.y);
+						this.enemies[key].setRotation(positionPayload.rotation);
+						this.enemies[key].setPosition(positionPayload.x, positionPayload.y);
 					}
 				}
 				break;
@@ -105,7 +107,7 @@ This is where the connection with the server is established and we set listeners
 		}
 	}
 
-	sendMessage(type:string, payload: unknown) {
+	sendMessage(type:string, payload: MessageData ) {
 		console.log(`sending message ${type}`);
 		if (this.socket?.readyState === WebSocket.OPEN) {
 			this.socket.send(JSON.stringify({ type, payload }));
@@ -163,7 +165,7 @@ This is the only collider in this simplified game. If the player hits any other 
 		);
 	}
 
-	playerCollision(player: any, foe: any) {
+	playerCollision(player: Player, foe: Player) {
 		this.sendMessage(PLAYER_DISCONNECTED, player.key);
 		player.destroy();
 		foe.destroy();

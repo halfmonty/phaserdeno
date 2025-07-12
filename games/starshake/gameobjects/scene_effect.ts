@@ -81,23 +81,19 @@ export default class SceneEffect {
         0x000000
       )
       .setOrigin(0, 0);
-    this.scene.tweens.add(
-      {
+    this.scene.tweens.add({
         targets: rectangle1,
         duration: 1000,
         x: { from: -rectangleWidth / 2, to: rectangleWidth / 2 },
-      }
-      /**
-       * Typescript Additions: You cannot provide more than one tween to the scene.tweens.add method.
-       */
-      // {
-      //   targets: rectangle2,
-      //   duration: 1000,
-      //   x: { from: this.scene.width, to: rectangleWidth },
-      //   onComplete: () => {
-      //     callback();
-      //   },
-      // }
-    );
+    });
+    this.scene.tweens.add({
+        targets: rectangle2,
+        duration: 1000,
+        x: { from: this.scene.width, to: rectangleWidth }
+    });
+
+    this.scene.tweens.events.addListener('onComplete', ()=> {
+      callback();
+    });
   }
 }

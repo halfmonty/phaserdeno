@@ -5,10 +5,13 @@
     "bundle": "deno bundle --watch ./games/mod.ts --outdir ./static/js --platform 'browser'"
   },
   "imports": {
+    "@types/easystarjs": "npm:@types/easystarjs@^0.3.4",
     "@yandeu/tap": "npm:@yandeu/tap@^0.1.2",
     "@enable3d/phaser-extension": "npm:@enable3d/phaser-extension@^0.26.1",
+    "easystarjs": "npm:easystarjs@^0.4.4",
     "matter-js": "npm:matter-js@^0.20.0",
     "phaser": "npm:phaser@4.0.0-rc.4",
+    "phaser3-rex-plugins": "npm:phaser3-rex-plugins@^1.1.74",
     "poly-decomp": "npm:poly-decomp@^0.3.0",
     "three": "npm:three@^0.178.0",
     "three-csg-ts": "npm:three-csg-ts@^3.2.0"
