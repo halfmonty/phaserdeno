@@ -8,7 +8,7 @@ import {
 type PlayerPositionData = { x: number; y: number; rotation: number; key: string; };
 type MessageData = Player | PlayerPositionData | string | Player & PlayerPositionData;
 
-const domain = Deno.env.get("wsdomain") ?? 'ws://localhost:8000';
+// const domain = Deno.env.get("wsdomain") ?? 'ws://localhost:8000';
 
 export default class Game extends Phaser.Scene {
 	id: number | null = null;
