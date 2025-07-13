@@ -36,7 +36,6 @@ export default class Game extends Phaser.Scene {
 		this.startSockets();
 		this.loadAudios();
 		this.playMusic();
-		this.addColliders();
 	}
 
 	/*
@@ -44,10 +43,14 @@ This is where the connection with the server is established and we set listeners
 	*/
 	startSockets() {
 		this.socket = new WebSocket(`ws://localhost:8000/ws/blastemup`);
+		this.enemies = {};
+		this.enemyPlayers = this.physics.add.group();
+		this.addPlayer();
+		this.addColliders();
 
 		this.socket.onopen = () => {
 			console.log('Connected to WebSocket server');
-			this.addPlayer();
+			this.sendMessage(NEW_PLAYER, this.player);
 		};
 
 		this.socket.onmessage = (event) => {
@@ -63,9 +66,6 @@ This is where the connection with the server is established and we set listeners
 			console.log('WebSocket connection closed');
 			this.destroy();
 		};
-
-		this.enemies = {};
-		this.enemyPlayers = this.physics.add.group();
 	}
 
 	handleMessage(type: string, payload: MessageData) {
@@ -131,7 +131,6 @@ When a new enemy event is received, we'll add this new game object to this playe
 		);
 		this.enemies[enemy.key] = enemy;
 		this.enemyPlayers.add(enemy);
-		this.addColliders();
 	}
 
 	/*
@@ -143,7 +142,6 @@ When we add our local player to the game, we must notify the server about it! We
 		const y = 500 + Phaser.Math.Between(-100, 100);
 		this.player = new Player(this, x, y, 'MyName:' + crypto.randomUUID());
 		console.log('Creating player! ', this.player.key);
-		this.sendMessage(NEW_PLAYER, this.player);
 		this.setCamera();
 	}
 
@@ -156,7 +154,6 @@ When we add our local player to the game, we must notify the server about it! We
 This is the only collider in this simplified game. If the player hits any other ship, both ships will be destroyed.
 	*/
 	addColliders() {
-		this.physics.add.collider(this.player, this.enemyPlayers);
 		this.physics.add.overlap(
 			this.player,
 			this.enemyPlayers,
@@ -167,6 +164,7 @@ This is the only collider in this simplified game. If the player hits any other 
 	}
 
 	playerCollision(player: Player, foe: Player) {
+		console.log("Collision! ");
 		this.sendMessage(PLAYER_DISCONNECTED, player.key);
 		player.destroy();
 		foe.destroy();

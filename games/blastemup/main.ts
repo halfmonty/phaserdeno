@@ -19,8 +19,7 @@ const config: Phaser.Types.Core.GameConfig = {
 		},
 	},
 	plugins: {},
-	scene: [Bootloader, Game],
-	...{useTicker: true}
+	scene: [Bootloader, Game]
 };
 
 export const Blastemup = () => new Phaser.Game(config);
