@@ -76,13 +76,14 @@ This is where the connection with the server is established and we set listeners
 				this.addEnemyPlayers(payload as Player);
 				break;
 
-			// case 'currentPlayers':
-			// 	Object.keys(payload as object).forEach((key) => {
-			// 		if (!this.enemies[key] && key !== this.player.key) {
-			// 			this.addEnemyPlayers(payload[key]);
-			// 		}
-			// 	});
-			// 	break;
+			case 'currentPlayers':
+				Object.keys(payload as object).forEach((key) => {
+					if (!this.enemies[key] && key !== this.player.key) {
+						// @ts-ignore other type
+						this.addEnemyPlayers(payload[key]);
+					}
+				});
+				break;
 
 			case 'playerMoved':
 				{
