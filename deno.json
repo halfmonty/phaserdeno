@@ -1,8 +1,9 @@
 {
   "tasks": {
-    "dev": {"dependencies": ["bundle", "serve"]},
+    "dev": {"dependencies": ["bundlewatch", "serve"]},
     "serve": "deno run --watch -A ./main.ts",
-    "bundle": "deno bundle --watch ./games/mod.ts --outdir ./static/js --platform 'browser'"
+    "bundlewatch": "deno bundle --watch ./games/mod.ts --outdir ./static/js --platform 'browser'",
+    "bundle": "deno bundle ./games/mod.ts --outdir ./static/js --platform 'browser'"
   },
   "imports": {
     "@mikewesthad/dungeon": "npm:@mikewesthad/dungeon@^2.0.1",
